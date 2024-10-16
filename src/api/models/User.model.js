@@ -1,4 +1,4 @@
-const moongoose = require('mongoose'); 
+const mongoose = require('mongoose'); 
 
 const Schema = mongoose.Schema; 
 
@@ -6,7 +6,7 @@ const userSchema =  new Schema(
 {
   name: {type: String , required: true },
   email: { type: String, required: true },
-  password: { type: string , required: true }, //* we have to remember to hash the password with bcrypt library 
+  password: { type: String , required: true }, //* we have to remember to hash the password with bcrypt library 
   // purchases: [{ type: }], //* we have to remember to connect this field with the purchases collection
   moneySpent: { type: Number },
   paymentMethods: [{ type: String }],
@@ -19,5 +19,6 @@ const userSchema =  new Schema(
 }
 );
 
-const User = mongoose.model('User', userSchema);
+const User = mongoose.model('User', userSchema, "User");
+
 module.exports = User;

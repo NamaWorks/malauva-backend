@@ -1,7 +1,7 @@
 {
-  "name": "cantina-backend",
+  "name": "malauva-backend",
   "version": "1.0.0",
-  "description": "\"# cantina-backend\"",
+  "description": "\"# malauva-backend\"",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,21 +10,24 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NamaWorks/cantina-backend.git"
+    "url": "git+https://github.com/NamaWorks/malauva-backend.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/NamaWorks/cantina-backend/issues"
+    "url": "https://github.com/NamaWorks/malauva-backend/issues"
   },
-  "homepage": "https://github.com/NamaWorks/cantina-backend#readme",
+  "homepage": "https://github.com/NamaWorks/malauva-backend#readme",
   "devDependencies": {
     "nodemon": "^3.1.4"
   },
   "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.0",
+    "fs": "^0.0.1-security",
     "mongoose": "^8.6.2"
   }
 }

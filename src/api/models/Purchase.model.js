@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const purchaseSchema = new Schema(
@@ -16,5 +17,5 @@ const purchaseSchema = new Schema(
   }
 );
 
-const Purchase = mongoose.model('Purchase', purchaseSchema);
+const Purchase = mongoose.model('Purchase', purchaseSchema, "Purchase");
 module.exports = Purchase;
