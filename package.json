@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "feed-users": "node src/seeds/users.seed.js"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,6 @@
     "express": "^4.21.0",
     "fs": "^0.0.1-security",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.6.2"
+    "mongoose": "^8.7.2"
   }
 }

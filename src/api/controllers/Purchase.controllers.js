@@ -1,4 +1,4 @@
-const Purchase = require("../models/Purchase.model")
+const Purchase = require("../models/Purchase.model.js")
 
 const getPurchases = async (req, res, next) => {
   try {

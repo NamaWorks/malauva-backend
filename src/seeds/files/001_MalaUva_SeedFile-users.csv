@@ -1,0 +1,12 @@
+﻿username;email;password;purchases;paymentMethods;adresses;vatNumber;lastConnection
+User 1;usemail@01.com;aaa;1;paymentMethod 1;adress 1;0;
+User 2;usemail@01.com;aaa;1;paymentMethod 2;adress 2;1;
+User 3;usemail@01.com;aaa;1;paymentMethod 3;adress 3;2;
+User 4;usemail@01.com;aaa;1;paymentMethod 4;adress 4;3;
+User 5;usemail@01.com;aaa;1;paymentMethod 5;adress 5;4;
+User 6;usemail@01.com;aaa;1;paymentMethod 6;adress 6;5;
+User 7;usemail@01.com;aaa;1;paymentMethod 7;adress 7;6;
+User 8;usemail@01.com;aaa;1;paymentMethod 8;adress 8;7;
+User 9;usemail@01.com;aaa;1;paymentMethod 9;adress 9;8;
+User 10;usemail@01.com;aaa;1;paymentMethod 10;adress 10;9;
+User 11;usemail@01.com;aaa;1;paymentMethod 11;adress 11;10;

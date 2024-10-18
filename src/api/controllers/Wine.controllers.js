@@ -1,4 +1,4 @@
-const Wine = require("../models/Wine.model")
+const Wine = require("../models/Wine.model.js")
 
 const getWines = async (req, res, next) => {
   try {

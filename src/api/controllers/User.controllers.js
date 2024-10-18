@@ -1,5 +1,5 @@
 const { generateSign } = require("../../utils/jwt")
-const User = require("../models/User.model")
+const User = require("../models/User.model.js")
 const bcrypt = require("bcrypt")
 
 const getUsers = async (req, res, next) => {

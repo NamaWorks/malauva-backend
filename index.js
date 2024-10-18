@@ -6,6 +6,15 @@ const userRouter = require("./src/api/routes/User.routes");
 const purchasesRouter = require("./src/api/routes/Purchase.routes");
 const winesRouter = require("./src/api/routes/Wine.routes");
 
+// import winesRouter from "./src/api/routes/Wine.routes.js";
+// import purchasesRouter from "./src/api/routes/Purchase.routes.js";
+// import userRouter from "./src/api/routes/User.routes.js";
+// import cors from "cors"
+// import { connectDB } from "./src/config/db.js";
+// import express from "express";
+// import { configDotenv } from "dotenv";
+// configDotenv()
+
 const server = express();
 
 connectDB()
