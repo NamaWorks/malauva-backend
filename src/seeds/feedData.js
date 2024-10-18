@@ -1,14 +1,10 @@
-// import mongoose, { Mongoose } from "mongoose"
-// import User from "../api/models/User.model"
-// import Purchase from "../api/models/Purchase.model"
-// import Wine from "../api/models/Wine.model"
-
-
 const mongoose = require("mongoose")
 
 const User = require("../api/models/User.model")
 const Wine = require("../api/models/Wine.model")
 const Purchase = require("../api/models/Purchase.model")
+
+require("dotenv").config();
 
 const  feedData = async (dataToFeed, collection) => {
   try {
@@ -35,7 +31,7 @@ const  feedData = async (dataToFeed, collection) => {
             break;
         }
       })
-      .catch((err)=>console.log(`error at emptying ${collection} collection`))
+      .catch((err)=>console.log(`error emptying ${collection} collection: ${err}`))
       .then(async () => {
         switch(collection) {
           case 'users':

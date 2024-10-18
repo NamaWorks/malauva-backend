@@ -23,4 +23,53 @@ const parseSeedUsers = (data) => {
   return usersArr
 }
 
-module.exports = { parseSeedUsers }
+const parseSeedWines = (data) => {
+  const arr = data.split("\n")
+  
+  class wine {
+    constructor (name, brand, picture,  taste, color, idealTemperature, scores, price) {
+      this.name=name
+      this.brand = brand
+      this.picture = picture
+      this.taste = taste
+      this.color = color
+      this.idealTemperature = idealTemperature
+      this.scores = scores
+      this.price = price
+    }
+  }
+
+  let winesArr = []
+
+  for (let i = 1; i < arr.length; i++) {
+    const itemInfo = arr[i].split(";")
+    winesArr.push(new wine(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7]))
+  }
+  return winesArr
+}
+
+const parseSeedPurchases = (data) => {
+  const arr = data.split("\n")
+  
+  class purchase {
+    constructor (client, itemsBought, totalSpent,  paymentMethod, adress, vatNumber, date) {
+      this.client=client
+      this.itemsBought = itemsBought
+      this.totalSpent = totalSpent
+      this.paymentMethod = paymentMethod
+      this.adress = adress
+      this.vatNumber = vatNumber
+      this.date = date
+    }
+  }
+
+  let purchasesArr = []
+
+  for (let i = 1; i < arr.length; i++) {
+    const itemInfo = arr[i].split(";")
+    purchasesArr.push(new purchase(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6]))
+  }
+  return purchasesArr
+}
+
+module.exports = { parseSeedUsers, parseSeedWines, parseSeedPurchases }

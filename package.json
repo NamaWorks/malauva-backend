@@ -7,7 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "feed-users": "node src/seeds/users.seed.js"
+    "feed-users": "node src/seeds/users.seed.js",
+    "feed-purchases": "node src/seeds/purchases.seed.js",
+    "feed-wines": "node src/seeds/wines.seed.js",
+    "feed-all-seeds": "node src/seeds/wines.seed.js src/seeds/users.seed.js src/seeds/purchases.seed.js"
   },
   "repository": {
     "type": "git",
