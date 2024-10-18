@@ -1,16 +1,16 @@
-import mongoose, { Mongoose } from "mongoose"
-import User from "../api/models/User.model"
-import Purchase from "../api/models/Purchase.model"
-import Wine from "../api/models/Wine.model"
+// import mongoose, { Mongoose } from "mongoose"
+// import User from "../api/models/User.model"
+// import Purchase from "../api/models/Purchase.model"
+// import Wine from "../api/models/Wine.model"
 
 
-// const mongoose = require("mongoose")
+const mongoose = require("mongoose")
 
-// const User = require("/src/api/models/User.model")
-// const Wine = require("/src/api/models/Wine.model")
-// const Purchase = require("/src/api/models/Purchase.model")
+const User = require("../api/models/User.model")
+const Wine = require("../api/models/Wine.model")
+const Purchase = require("../api/models/Purchase.model")
 
-export const  feedData = async (dataToFeed, collection) => {
+const  feedData = async (dataToFeed, collection) => {
   try {
     await mongoose
       .connect(process.env.DB_URL)
@@ -63,3 +63,5 @@ export const  feedData = async (dataToFeed, collection) => {
     console.log(`error feeding the DB: ${err}`)
   }
 }
+
+module.exports = { feedData }

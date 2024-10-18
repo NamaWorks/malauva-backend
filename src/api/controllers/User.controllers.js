@@ -5,10 +5,12 @@ const bcrypt = require("bcrypt")
 const getUsers = async (req, res, next) => {
   try {
     const allUsers = await User.find()
-    return res.status()
+    return res.status(200).json(allUsers)
   } catch (error) {
     return res.status(400).json("failed at getUsers")
   }
+
+  // return res.status(200).json("users")
 }
 
 const getUserById = async (req, res, next) => {

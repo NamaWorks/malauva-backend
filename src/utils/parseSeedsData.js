@@ -1,4 +1,4 @@
-export const parseSeedUsers = (data) => {
+const parseSeedUsers = (data) => {
   const arr = data.split("\n")
   
   class user {
@@ -22,3 +22,5 @@ export const parseSeedUsers = (data) => {
   }
   return usersArr
 }
+
+module.exports = { parseSeedUsers }

@@ -6,15 +6,6 @@ const userRouter = require("./src/api/routes/User.routes");
 const purchasesRouter = require("./src/api/routes/Purchase.routes");
 const winesRouter = require("./src/api/routes/Wine.routes");
 
-// import winesRouter from "./src/api/routes/Wine.routes.js";
-// import purchasesRouter from "./src/api/routes/Purchase.routes.js";
-// import userRouter from "./src/api/routes/User.routes.js";
-// import cors from "cors"
-// import { connectDB } from "./src/config/db.js";
-// import express from "express";
-// import { configDotenv } from "dotenv";
-// configDotenv()
-
 const server = express();
 
 connectDB()
@@ -28,9 +19,9 @@ server.use("/wines", winesRouter)
 server.use("/purchases", purchasesRouter)
 
 server.use("*", (req, res, next)=>{
-  return res.status(404).json("route not found")
+  return res.status(404).json("no route for you today")
 })
 
 server.listen(3000,()=>{
-  console.log("server started at: https://localhost:3000")
+  console.log("server started at: http://localhost:3000")
 })
