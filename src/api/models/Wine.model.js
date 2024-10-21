@@ -16,8 +16,9 @@ const wineSchema = new Schema(
 },
 {
   timestamps: true,
+  collection: "wines"
 }
 );
 
-const Wine = mongoose.model('Wine', wineSchema, "Wine");
+const Wine = mongoose.model('wines', wineSchema, "wines");
 module.exports = Wine; 

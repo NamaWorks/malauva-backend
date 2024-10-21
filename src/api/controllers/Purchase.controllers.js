@@ -19,6 +19,21 @@ const getPurchaseById = async (req, res, next) => {
   }
 }
 
+const createPurchase = async (req, res, next) => {
+  try {
+    const newPurchase = new Purchase({
+      ...req.body
+    })
+
+    const purchaseSaved = await newPurchase.save()
+
+    return res.status(201).json(purchaseSaved)
+
+  } catch (error) {
+    return res.status(400).json(`failed at createPurchase: ${error}`)
+  }
+}
+
 const deletePurchase = async (req, res, next) => {
   try {
     const { id } = req.params
@@ -36,7 +51,7 @@ const updatePurchase = async (req, res, next) => {
     const originalPurchase = Purchase.findById(id)
     const newPurchase = new Purchase({
       ...originalPurchase,
-      req.body
+      ...req.body,
     })
     newPurchase._id = id
     const updatedPurchase = await Purchase.findByIdAndUpdate(id, newPurchase, {new: true})
@@ -46,4 +61,4 @@ const updatePurchase = async (req, res, next) => {
   }
 }
 
-module.exports = { getPurchases, getPurchaseById, deletePurchase, updatePurchase }
+module.exports = { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase }

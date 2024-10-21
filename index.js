@@ -5,6 +5,7 @@ const cors = require("cors")
 const userRouter = require("./src/api/routes/User.routes");
 const purchasesRouter = require("./src/api/routes/Purchase.routes");
 const winesRouter = require("./src/api/routes/Wine.routes");
+const { configCloudinary } = require("./src/middlewares/files.middleware");
 
 const server = express();
 
@@ -13,6 +14,8 @@ connectDB()
 server.use(express.json())
 // with the next line we allow our server to use cross origin resources
 server.use(cors())
+// with the next line we initialize the Cloudinary connection configuration
+configCloudinary()
 
 server.use("/users", userRouter)
 server.use("/wines", winesRouter)

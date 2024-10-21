@@ -13,9 +13,10 @@ const purchaseSchema = new Schema(
     date: { type: String }
   },
   {
-    timestamps: true
+    timestamps: true,
+    collection: "purchases"
   }
 );
 
-const Purchase = mongoose.model('Purchase', purchaseSchema, "Purchase");
+const Purchase = mongoose.model('purchases', purchaseSchema, "purchases");
 module.exports = Purchase;

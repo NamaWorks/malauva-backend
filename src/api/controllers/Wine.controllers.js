@@ -1,3 +1,4 @@
+const { deleteImgCloudinary } = require("../../middlewares/files.middleware.js")
 const Wine = require("../models/Wine.model.js")
 
 const getWines = async (req, res, next) => {
@@ -84,10 +85,28 @@ const deleteWineById = async (req, res, next) => {
   }
 }
 
+const createWine = async (req, res, next) => {
+  try {
+    const newWine = new Wine({
+      ...req.body
+    });
+
+    if(req.file){newWine.picture=req.file.path}
+
+    const wineDuplicated = await Wine.findOne({name: req.body.name})
+    if(wineDuplicated){return res.status(400).json(`that wine name already exists`)}
+    const wineSaved = await newWine.save()
+    return res.status(201).json(wineSaved)
+  } catch (error) {
+    return res.status(400).json(`error at createWine: ${error}`)
+  }
+}
+
 const updateWineById = async (req, res, next) => {
   try {
     const { id } = req.params
     const wineToUpdate = await Wine.findById(id)
+    if(wineToUpdate.picture){deleteImgCloudinary(wineToUpdate.picture)}
 
     const newWine = new Wine({
       name: req.body.name ,
@@ -112,4 +131,4 @@ const updateWineById = async (req, res, next) => {
   }
 }
 
-module.exports = { getWines, getWineById, getWinesByTaste, getWinesByColor, getWinesByTemperature, getWinesByOrigin, getWinesByScores, deleteWineById, updateWineById }
+module.exports = { createWine, getWines, getWineById, getWinesByTaste, getWinesByColor, getWinesByTemperature, getWinesByOrigin, getWinesByScores, deleteWineById, updateWineById }

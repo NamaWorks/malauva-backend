@@ -1,7 +1,14 @@
-const { getUsers } = require("../controllers/User.controllers");
+const { isAuth } = require("../../middlewares/isAuth");
+const { isAdmin } = require("../../utils/isAdmin");
+const { getUsers, getUserById, userLogin, userSignup, deleteUser, updateUser } = require("../controllers/User.controllers");
 
 const userRouter = require("express").Router()
 
-userRouter.get("/",getUsers)
+userRouter.get("/", [isAdmin], getUsers)
+userRouter.get("/:id", [isAdmin] ,getUserById)
+userRouter.post("/login", userLogin)
+userRouter.post("/signup", userSignup)
+userRouter.delete("/delete/:id", [isAuth], deleteUser)
+userRouter.patch("/update/:id", [isAuth], updateUser)
 
 module.exports = userRouter
