@@ -27,14 +27,15 @@ const parseSeedWines = (data) => {
   const arr = data.split("\n")
   
   class wine {
-    constructor (name, brand, picture,  taste, color, idealTemperature, scores, price) {
+    constructor (name, brand, picture,  taste, color, idealTemperature, origin, scores, price) {
       this.name=name
       this.brand = brand
       this.picture = picture
       this.taste = taste
       this.color = color
       this.idealTemperature = idealTemperature
-      this.scores = scores
+      this.origin = origin
+      this.scores = scores.split("")
       this.price = price
     }
   }
@@ -43,7 +44,7 @@ const parseSeedWines = (data) => {
 
   for (let i = 1; i < arr.length; i++) {
     const itemInfo = arr[i].split(";")
-    winesArr.push(new wine(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7]))
+    winesArr.push(new wine(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7], itemInfo[8]))
   }
   return winesArr
 }

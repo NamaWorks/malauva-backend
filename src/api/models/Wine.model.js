@@ -8,6 +8,7 @@ const wineSchema = new Schema(
   brand: { type: String, required: false , default:'no-brand' },
   picture: {type: String, required: false, default: ''},
   taste: { type: String },
+  color: { type: String },
   idealTemperature: { type: Number, required: true },
   origin: {type: String, required: false },
   scores: [{ type: Number }],
