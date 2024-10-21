@@ -1,8 +1,5 @@
-// const { default: mongoose } = require("mongoose");
-
 const mongoose = require('mongoose'); 
-
-// import mongoose from "mongoose";
+const bcrypt = require('bcrypt')
 
 const Schema = mongoose.Schema; 
 
@@ -22,6 +19,10 @@ const userSchema =  new Schema(
   timestamps: true,
 }
 );
+
+userSchema.pre("save", function(){
+  this.password = bcrypt.hashSync(this.password, 10)
+})
 
 const User = mongoose.model('User', userSchema, "User");
 

@@ -9,8 +9,6 @@ const getUsers = async (req, res, next) => {
   } catch (error) {
     return res.status(400).json("failed at getUsers")
   }
-
-  // return res.status(200).json("users")
 }
 
 const getUserById = async (req, res, next) => {
@@ -39,4 +37,58 @@ const userLogin = async (req, res, next) => {
   }
 }
 
-module.exports = { getUsers, }  
+const userSignup = async (req, res, next) => {
+  try {
+    const newUser = new User({...req.body})
+
+    const userDuplicated = await user.findOne({email:req.body.email})
+    userDuplicated && res.status(400).json("that email is already in use")
+
+    const userSaved = await newUser.save()
+    return res.status(201).json(userSaved)
+
+  } catch (error) {
+    return res.status(400).json("failed at userSignup")
+  }
+}
+
+
+const deleteUser = async (req, res, next) => {
+  try {
+    const { id } = req.params
+    const userToDelete = await User.findById(id)
+
+    const userDeleted = await User.findByIdAndDelete(id)
+
+    return res.status(200).json(userDeleted)
+  } catch (error) {
+    return res.status(400).json(`error at deleteUser: ${error}`)
+  }
+}
+
+const updateUser = async (req,res,next) => {
+  try {
+    const { id } = req.params
+    const originalUser = await User.findById(id)
+
+    const newUser = new Useer({
+      username: req.body.username,
+      email: req.body.email,
+      password: bcrypt.hashSync(req.body.password, 10),
+      moneySpent: req.body.moneySpent,
+      paymentMethods: req.body.paymentMethods,
+      addresses: req.body.addresses,
+      vatNumber: req.body.vatNumber,
+      lastConnection: req.body.lastConnection
+    })
+
+    newUser._id = id
+    const updatedUser = await User.findByIdAndUpdate(id, newUser, {new: true})
+    return res.status(200).json(updatedUser)
+
+  } catch (error) {
+    return res.status(400).json(`error at updateUser: ${error}`)
+  }
+}
+
+module.exports = { getUsers, getUserById, userSignup, deleteUser, updateUser }   
