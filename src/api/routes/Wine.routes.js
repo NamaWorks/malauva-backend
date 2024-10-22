@@ -11,7 +11,7 @@ winesRouter.get("/temperature/:idealTemperature", getWinesByTemperature)
 winesRouter.get("/origin/:origin", getWinesByOrigin)
 winesRouter.post("/create", [isAdmin], createWine)
 winesRouter.delete("/remove/:id", [isAdmin], deleteWineById)
-winesRouter.put("/update/:id", [isAdmin], updateWineById)
+winesRouter.patch("/update/:id", [isAdmin], updateWineById)
 
 
 

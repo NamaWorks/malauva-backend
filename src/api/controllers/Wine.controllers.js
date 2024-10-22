@@ -13,7 +13,7 @@ const getWines = async (req, res, next) => {
 const getWineById = async (req, res, next) => {
   try {
     const { id } = req.params
-    const wine = Wine.findById(id)
+    const wine = await Wine.findById(id)
     return res.status(200).json(wine)
   } catch (error) {
     return res.status(400).json(`error at getWineById: ${error}`)
@@ -23,7 +23,7 @@ const getWineById = async (req, res, next) => {
 const getWinesByTaste = async (req, res, next) => {
   try {
     const {taste} = req.params
-    const winesByTaste = Wine.find({taste: req.body.taste})
+    const winesByTaste = await Wine.find({taste: taste})
     return res.status(200).json(winesByTaste)
   } catch (error) {
     return res.status(400).json(`error at getWinesByTaste: ${error}`)
@@ -33,7 +33,7 @@ const getWinesByTaste = async (req, res, next) => {
 const getWinesByColor = async (req, res, next) => {
   try {
     const {color} = req.params
-    const winesByColor = Wine.find({taste: req.body.color})
+    const winesByColor = await Wine.find({color: color})
     return res.status(200).json(winesByColor)
   } catch (error) {
     return res.status(400).json(`error at getWinesByColor: ${error}`)
@@ -43,7 +43,7 @@ const getWinesByColor = async (req, res, next) => {
 const getWinesByTemperature = async (req, res, next) => {
   try {
     const { idealTemperature } = req.params
-    const winesByTemp = Wine.find({idealTemperature: req.body.idealTemperature})
+    const winesByTemp = await Wine.find({idealTemperature: idealTemperature})
     return res.status(200).json(winesByTemp)
   } catch (error) {
     return res.status(400).json(`error at getWinesByTemperature: ${error}`)
@@ -53,7 +53,7 @@ const getWinesByTemperature = async (req, res, next) => {
 const getWinesByOrigin = async (req, res, next) => {
   try {
     const { origin } = req.params
-    const winesByOrigin = Wine.find({origin: req.body.origin})
+    const winesByOrigin = await Wine.find({origin: origin})
     return res.status(200).json(winesByOrigin)
   } catch (error) {
     return res.status(400).json(`error at getWinesByOrigin: ${error}`)
