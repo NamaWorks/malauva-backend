@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const purchaseSchema = new Schema(
   {
     idNumber: {type: Number, required: true},
-    client: { type: String  },  // remember to connect to User model
-    itemsBought: [{ type: String }], // remember to connect to Wine model
+    client: { type: Number },  // remember to connect to User model
+    itemsBought: [{ type: Number }], // remember to connect to WineWine model
     totalSpent: { type: Number },
     paymentMethod: { type: String },
     address: { type: String },
-    vatNumber: { type:  String },
+    vatNumber: { type:  Boolean },
     date: { type: String }
   },
   {
