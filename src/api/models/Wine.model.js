@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const wineSchema = new Schema(
 {
+  idNumber: {type: Number, required: true},
   name: { type: String , required: true },
   brand: { type: String, required: false , default:'no-brand' },
   picture: {type: String, required: false, default: ''},

@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 
 const purchaseSchema = new Schema(
   {
+    idNumber: {type: Number, required: true},
     client: { type: String  },  // remember to connect to User model
     itemsBought: [{ type: String }], // remember to connect to Wine model
     totalSpent: { type: Number },

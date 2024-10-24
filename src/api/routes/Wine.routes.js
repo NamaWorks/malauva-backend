@@ -1,4 +1,4 @@
-const { isAdmin } = require("../../utils/isAdmin")
+const { isAdmin } = require("../../middlewares/isAdmin")
 const { getWines, getWineById, getWinesByTaste, getWinesByColor, getWinesByTemperature, getWinesByOrigin, deleteWineById, updateWineById, createWine } = require("../controllers/Wine.controllers")
 
 const winesRouter = require("express").Router()

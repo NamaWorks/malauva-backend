@@ -1,5 +1,5 @@
+const { isAdmin } = require("../../middlewares/isAdmin")
 const { isAuth } = require("../../middlewares/isAuth")
-const { isAdmin } = require("../../utils/isAdmin")
 const { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase } = require("../controllers/Purchase.controllers")
 
 const purchasesRouter = require("express").Router()

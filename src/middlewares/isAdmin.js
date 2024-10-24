@@ -1,5 +1,5 @@
 const User = require("../api/models/User.model")
-const { verifyJwt } = require("./jwt")
+const { verifyJwt } = require("../utils/jwt")
 
 const isAdmin = async (req, res, next) => {
   try {

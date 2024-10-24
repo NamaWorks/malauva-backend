@@ -5,16 +5,17 @@ const Schema = mongoose.Schema;
 
 const userSchema =  new Schema(
 {
+  idNumber: {type: Number, required: true},
   username: {type: String , required: true },
   email: { type: String, required: true },
   password: { type: String , required: true },
-  // purchases: [{ type: }], //* we have to remember to connect this field with the purchases collection
-  moneySpent: { type: Number },
   paymentMethods: [{ type: String }],
   addresses: [{ type: String }],
   vatNumber: { type: String },
   lastConnection: { type: String },
-  role: { type: String, required: false, default: "user" }
+  role: { type: String, required: false, default: "user" },
+  scoresGiven: [{ type: mongoose.Types.ObjectId, ref: "wines" , required: false}],
+  purchases: [{ type: mongoose.Types.ObjectId, ref:"purchases", required: false}] 
 },
 {
   timestamps: true,

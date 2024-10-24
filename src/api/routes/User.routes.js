@@ -1,5 +1,5 @@
+const { isAdmin } = require("../../middlewares/isAdmin");
 const { isAuth } = require("../../middlewares/isAuth");
-const { isAdmin } = require("../../utils/isAdmin");
 const { getUsers, getUserById, userLogin, userSignup, deleteUser, updateUser } = require("../controllers/User.controllers");
 
 const userRouter = require("express").Router()
