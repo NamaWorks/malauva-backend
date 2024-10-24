@@ -94,4 +94,13 @@ const updateUser = async (req,res,next) => {
   }
 }
 
-module.exports = { getUsers, getUserById, userLogin, userSignup, deleteUser, updateUser }   
+const populateUsers = async (req, res, next) => {
+  try {
+    const users = await User.find().populate(["scoresGiven", "purchases"])
+    return res.status(200).json(users)
+  } catch (error) {
+    return next(error)
+  }
+}
+
+module.exports = { getUsers, getUserById, userLogin, userSignup, deleteUser, updateUser, populateUsers }   

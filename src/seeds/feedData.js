@@ -42,7 +42,6 @@ const  feedData = async (dataToFeed, collection) => {
 
         if(collection == "users"){
           const purchasesDb = await Purchase.find()
-          console.log(purchasesDb)
           for (const user in dataToFeed) {
             let purchasesData = []
             dataToFeed[user].purchases.forEach(purchase => {
@@ -52,8 +51,23 @@ const  feedData = async (dataToFeed, collection) => {
             });
 
             dataToFeed[user].purchases = purchasesData
-
           }
+
+          const winesDb = await Wine.find()
+          for (const user in dataToFeed) {
+            let winesData = []
+            dataToFeed[user].scoresGiven.forEach(score => {
+              console.log(score)
+              winesDb.forEach((wine)=>{
+                wine.idNumber == score && winesData.push(wine._id)
+              })
+            });
+
+            dataToFeed[user].scoresGiven = winesData
+
+            console.log(dataToFeed)
+        }
+
         }
       })
       .catch((error)=>{console.log(error)})

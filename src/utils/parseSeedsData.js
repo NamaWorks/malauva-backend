@@ -14,7 +14,7 @@ const parseSeedUsers = (data) => {
       this.vatNumber = vatNumber
       this.lastConnection = lastConnection ? lastConnection : new Date()
       this.role= role == "admin" ? role = "admin" : role = "user"
-      this.scoresGiven = Number(scoresGiven.replace("\r", ""))
+      this.scoresGiven = scoresGiven.replace("\r", "").split(" ")
     }
   }
 
