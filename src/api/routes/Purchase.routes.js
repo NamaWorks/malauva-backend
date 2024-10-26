@@ -8,6 +8,6 @@ purchasesRouter.get("/", [isAuth], getPurchases)
 purchasesRouter.get("/:id", [isAuth], getPurchaseById)
 purchasesRouter.post("/create",[isAuth], createPurchase)
 purchasesRouter.delete("/:id", [isAdmin], deletePurchase)
-purchasesRouter.put("/:id", [isAuth] , updatePurchase)
+purchasesRouter.patch("/:id", [isAuth] , updatePurchase)
 
 module.exports = purchasesRouter

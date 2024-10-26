@@ -16,7 +16,8 @@ const userSchema =  new Schema(
   vatNumber: { type: String },
   lastConnection: { type: String },
   role: { type: String, required: false, default: "user" },
-  scoresGiven: [{ type: mongoose.Types.ObjectId, ref: "wines" , required: false}]
+  scoresGiven: [{ type: mongoose.Types.ObjectId, ref: "wines" , required: false}],
+  phoneNumber: { type: Number,  default: 0}
 },
 {
   timestamps: true,

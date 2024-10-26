@@ -2,7 +2,7 @@ const parseSeedUsers = (data) => {
   const arr = data.split("\n")
   
   class user {
-    constructor (idNumber, personName, username, email, password, purchases, paymentMethods, adresses, vatNumber, lastConnection, role, scoresGiven, status) {
+    constructor (idNumber, personName, username, email, password, purchases, paymentMethods, adresses, vatNumber, lastConnection, role, scoresGiven, phoneNumber) {
       this.idNumber =idNumber
       this.personName = personName.replaceAll(",","").replaceAll(`"`, "")
       this.username = username.replaceAll(",","").replaceAll(`"`, "")
@@ -15,6 +15,7 @@ const parseSeedUsers = (data) => {
       this.lastConnection = lastConnection ? lastConnection : new Date()
       this.role= role == "admin" ? role = "admin" : role = "user"
       this.scoresGiven = scoresGiven.replace("\r", "").split(" ")
+      this.phoneNumber = phoneNumber
     }
   }
 
@@ -22,7 +23,7 @@ const parseSeedUsers = (data) => {
 
   for (let i = 1; i < arr.length; i++) {
     const itemInfo = arr[i].split(";")
-    usersArr.push(new user(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7], itemInfo[8], itemInfo[9], itemInfo[10], itemInfo[11]))
+    usersArr.push(new user(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7], itemInfo[8], itemInfo[9], itemInfo[10], itemInfo[11], itemInfo[12] || 0))
   }
   return usersArr
 }
@@ -55,7 +56,7 @@ const parseSeedWines = (data) => {
 }
 
 const parseSeedPurchases = (data) => {
-  const arr = data.split("\n")
+  const arr = data.replaceAll("\r", "").split("\n")
   
   class purchase {
     constructor (idNumber, client, itemsBought, totalSpent,  paymentMethod, adress, vatNumber, date, status) {
@@ -66,7 +67,7 @@ const parseSeedPurchases = (data) => {
       this.paymentMethod = paymentMethod
       this.adress = adress
       this.vatNumber = vatNumber=="TRUE" ? true : false
-      this.date = date
+      this.date = date == "" ?  new Date() : date
       this.status = status || "processing"
     }
   }
