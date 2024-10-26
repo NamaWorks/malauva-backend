@@ -2,7 +2,7 @@ const parseSeedUsers = (data) => {
   const arr = data.split("\n")
   
   class user {
-    constructor (idNumber, personName, username, email, password, purchases, paymentMethods, adresses, vatNumber, lastConnection, role, scoresGiven) {
+    constructor (idNumber, personName, username, email, password, purchases, paymentMethods, adresses, vatNumber, lastConnection, role, scoresGiven, status) {
       this.idNumber =idNumber
       this.personName = personName.replaceAll(",","").replaceAll(`"`, "")
       this.username = username.replaceAll(",","").replaceAll(`"`, "")
@@ -15,6 +15,7 @@ const parseSeedUsers = (data) => {
       this.lastConnection = lastConnection ? lastConnection : new Date()
       this.role= role == "admin" ? role = "admin" : role = "user"
       this.scoresGiven = scoresGiven.replace("\r", "").split(" ")
+      this.status = status
     }
   }
 
@@ -22,7 +23,7 @@ const parseSeedUsers = (data) => {
 
   for (let i = 1; i < arr.length; i++) {
     const itemInfo = arr[i].split(";")
-    usersArr.push(new user(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7], itemInfo[8], itemInfo[9], itemInfo[10], itemInfo[11]))
+    usersArr.push(new user(itemInfo[0], itemInfo[1], itemInfo[2], itemInfo[3], itemInfo[4], itemInfo[5], itemInfo[6], itemInfo[7], itemInfo[8], itemInfo[9], itemInfo[10], itemInfo[11], itemInfo[12] || "processing"))
   }
   return usersArr
 }

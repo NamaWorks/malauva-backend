@@ -11,7 +11,8 @@ const purchaseSchema = new Schema(
     paymentMethod: { type: String },
     address: { type: String },
     vatNumber: { type:  Boolean },
-    date: { type: String }
+    date: { type: String },
+    status: {type: String, enum: ["delivered", "shipping", "processing", "canceled", "in return"], default:"processing"}
   },
   {
     timestamps: true,
