@@ -61,4 +61,13 @@ const updatePurchase = async (req, res, next) => {
   }
 }
 
-module.exports = { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase }
+const populatePurchases = async (req, res, next) => {
+  try {
+    const purchases = await Purchase.find().populate(["client", "itemsBought"])
+    return res.status(200).json(purchases)
+  } catch (error) {
+    return res.status(400).json(`error at populatePurchases: ${error}`)
+  }
+}
+
+module.exports = { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase, populatePurchases }

@@ -1,9 +1,10 @@
 const { isAdmin } = require("../../middlewares/isAdmin")
 const { isAuth } = require("../../middlewares/isAuth")
-const { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase } = require("../controllers/Purchase.controllers")
+const { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPurchase, populatePurchases } = require("../controllers/Purchase.controllers")
 
 const purchasesRouter = require("express").Router()
 
+purchasesRouter.get("/", populatePurchases)
 purchasesRouter.get("/", [isAuth], getPurchases)
 purchasesRouter.get("/:id", [isAuth], getPurchaseById)
 purchasesRouter.post("/create",[isAuth], createPurchase)

@@ -39,34 +39,58 @@ const  feedData = async (dataToFeed, collection) => {
 
       // ---------------------continue here----------------------------------
       .then(async()=>{
+        switch(collection) {
+          case "users": 
 
-        if(collection == "users"){
-          const purchasesDb = await Purchase.find()
-          for (const user in dataToFeed) {
-            let purchasesData = []
-            dataToFeed[user].purchases.forEach(purchase => {
-              purchasesDb.forEach((purchaseItem)=>{
-                purchaseItem.idNumber == purchase && purchasesData.push((purchaseItem._id))
-              })
-            });
-
-            dataToFeed[user].purchases = purchasesData
+            const purchasesDb = await Purchase.find()
+            for (const user in dataToFeed) {
+              let purchasesData = []
+              dataToFeed[user].purchases.forEach(purchase => {
+                purchasesDb.forEach((purchaseItem)=>{
+                  purchaseItem.idNumber == purchase && purchasesData.push((purchaseItem._id))
+                })
+              });
+              dataToFeed[user].purchases = purchasesData
+            }
+            const winesDb = await Wine.find()
+            for (const user in dataToFeed) {
+              let winesData = []
+              dataToFeed[user].scoresGiven.forEach(score => {
+                console.log(score)
+                winesDb.forEach((wine)=>{
+                  wine.idNumber == score && winesData.push(wine._id)
+                })
+              });
+              dataToFeed[user].scoresGiven = winesData 
+              console.log(dataToFeed)
           }
+          break;
 
-          const winesDb = await Wine.find()
-          for (const user in dataToFeed) {
-            let winesData = []
-            dataToFeed[user].scoresGiven.forEach(score => {
-              console.log(score)
-              winesDb.forEach((wine)=>{
-                wine.idNumber == score && winesData.push(wine._id)
+          case "purchases":
+
+            const usersDb = await User.find()
+            for(const purchase in dataToFeed){
+              let usersData
+              usersDb.forEach((user)=>{
+                purchase.client == purchase.idNumber && (usersData=user._id)
               })
-            });
+              dataToFeed[purchase].client = usersData
+            }
 
-            dataToFeed[user].scoresGiven = winesData
-
-            console.log(dataToFeed)
-        }
+            const winesDbPurchase = await Wine.find()
+            for (const purchase in dataToFeed) {
+              let winesData = []
+              console.log(dataToFeed[purchase])
+              dataToFeed[purchase].itemsBought.forEach(item => {
+                console.log(item)
+                winesDbPurchase.forEach((wine)=>{
+                  wine.idNumber == item && winesData.push(wine._id)
+                })
+              });
+              dataToFeed[purchase].itemsBought = winesData 
+              console.log(dataToFeed)
+          }
+  
 
         }
       })

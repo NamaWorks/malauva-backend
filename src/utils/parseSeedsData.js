@@ -62,7 +62,7 @@ const parseSeedPurchases = (data) => {
     constructor (idNumber, client, itemsBought, totalSpent,  paymentMethod, adress, vatNumber, date, status) {
       this.idNumber=idNumber
       this.client=client
-      this.itemsBought = itemsBought
+      this.itemsBought = itemsBought.split(" ")
       this.totalSpent = totalSpent
       this.paymentMethod = paymentMethod
       this.adress = adress
