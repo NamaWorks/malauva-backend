@@ -11,8 +11,7 @@
     "feed-purchases": "node src/seeds/purchases.seed.js",
     "feed-wines": "node src/seeds/wines.seed.js",
     "feed-all-seeds": "node src/seeds/wines.seed.js && node src/seeds/purchases.seed.js && node src/seeds/users.seed.js",
-    "jest-test": "jest --verbose --runInBand",
-    "test-token": "nodemon src/utils/for_token_test.js"
+    "jest-test": "jest --verbose --runInBand"
   },
   "repository": {
     "type": "git",

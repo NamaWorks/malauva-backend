@@ -4,11 +4,11 @@ const { getPurchases, getPurchaseById, deletePurchase, updatePurchase, createPur
 
 const purchasesRouter = require("express").Router()
 
-purchasesRouter.get("/", populatePurchases)
 purchasesRouter.get("/", [isAuth], getPurchases)
 purchasesRouter.get("/:id", [isAuth], getPurchaseById)
 purchasesRouter.post("/create",[isAuth], createPurchase)
 purchasesRouter.delete("/:id", [isAdmin], deletePurchase)
 purchasesRouter.patch("/:id", [isAuth] , updatePurchase)
+purchasesRouter.get("/", populatePurchases)
 
 module.exports = purchasesRouter
