@@ -4,12 +4,12 @@ const { getUsers, getUserById, userLogin, userSignup, deleteUser, updateUser, po
 
 const userRouter = require("express").Router()
 
-userRouter.get("/", populateUsers) 
 userRouter.get("/", [isAdmin], getUsers)
 userRouter.get("/:id", [isAdmin] ,getUserById)
 userRouter.post("/login", userLogin)
 userRouter.post("/signup", userSignup)
 userRouter.delete("/delete/:id", [isAuth], deleteUser)
 userRouter.patch("/update/:id", [isAuth], updateUser)
+userRouter.get("/", populateUsers)
 
 module.exports = userRouter
