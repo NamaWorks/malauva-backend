@@ -31,7 +31,9 @@ describe('wines endpoints', ()=> {
 
   test('getWinesByTaste working and return in json format', async()=> {
     await api 
-      .get('/wines/taste/taste test')
+      // .get('/wines/taste/taste test')
+      .get("/wines/taste/taste test", (req, res)=>{console.log(res)})
+      // we can work with a callback function here to debug or prepare the data
       .expect(200)
       .expect('Content-Type', /application\/json/)
   })
