@@ -1,3 +1,3 @@
-const apiUrl = "http://localhost:3000"
+const apiUrl = "http://localhost:3000";
 
-module.exports = apiUrl
+module.exports = apiUrl;

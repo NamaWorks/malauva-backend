@@ -11,7 +11,10 @@
     "feed-purchases": "node src/seeds/purchases.seed.js",
     "feed-wines": "node src/seeds/wines.seed.js",
     "feed-all-seeds": "node src/seeds/wines.seed.js && node src/seeds/purchases.seed.js && node src/seeds/users.seed.js",
-    "jest-test": "cross-env NODE_ENV=test jest --verbose --runInBand"
+    "jest-test": "cross-env NODE_ENV=test jest --verbose --runInBand",
+    "lint:fix": "eslint ./src .jsx,.js, --quiet --fix ./.gitignore",
+    "lint:format": "prettier  --log-level warn --write \"./**/*.{js,jsx,css,md,json}\" ",
+    "lint": "npm run lint:format && npm run lint:fix "
   },
   "repository": {
     "type": "git",
@@ -26,8 +29,13 @@
   "homepage": "https://github.com/NamaWorks/malauva-backend#readme",
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "eslint": "^9.13.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "globals": "^15.11.0",
     "jest": "^29.7.0",
     "nodemon": "^3.1.4",
+    "prettier": "^3.3.3",
     "supertest": "^7.0.0"
   },
   "dependencies": {

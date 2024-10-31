@@ -1,73 +1,75 @@
-const { deleteImgCloudinary } = require("../../middlewares/files.middleware.js")
-const Wine = require("../models/Wine.model.js")
+const {
+  deleteImgCloudinary,
+} = require("../../middlewares/files.middleware.js");
+const Wine = require("../models/Wine.model.js");
 
 const getWines = async (req, res, next) => {
   try {
-    const allWines = await Wine.find()
-    return res.status(200).json(allWines)
+    const allWines = await Wine.find();
+    return res.status(200).json(allWines);
   } catch (error) {
-    return res.status(400).json(`error at getWines: ${error}`)
+    return res.status(400).json(`error at getWines: ${error}`);
   }
-}
+};
 
 const getWineById = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const wine = await Wine.findById(id)
-    return res.status(200).json(wine)
+    const { id } = req.params;
+    const wine = await Wine.findById(id);
+    return res.status(200).json(wine);
   } catch (error) {
-    return res.status(400).json(`error at getWineById: ${error}`)
+    return res.status(400).json(`error at getWineById: ${error}`);
   }
-}
+};
 
 const getWinesByTaste = async (req, res, next) => {
   try {
-    const {taste} = req.params
-    const winesByTaste = await Wine.find({taste: taste})
-    return res.status(200).json(winesByTaste)
+    const { taste } = req.params;
+    const winesByTaste = await Wine.find({ taste: taste });
+    return res.status(200).json(winesByTaste);
   } catch (error) {
-    return res.status(400).json(`error at getWinesByTaste: ${error}`)
+    return res.status(400).json(`error at getWinesByTaste: ${error}`);
   }
-}
+};
 
 const getWinesByColor = async (req, res, next) => {
   try {
-    const {color} = req.params
-    const winesByColor = await Wine.find({color: color})
-    return res.status(200).json(winesByColor)
+    const { color } = req.params;
+    const winesByColor = await Wine.find({ color: color });
+    return res.status(200).json(winesByColor);
   } catch (error) {
-    return res.status(400).json(`error at getWinesByColor: ${error}`)
+    return res.status(400).json(`error at getWinesByColor: ${error}`);
   }
-} 
+};
 
 const getWinesByTemperature = async (req, res, next) => {
   try {
-    const { idealTemperature } = req.params
-    const winesByTemp = await Wine.find({idealTemperature: idealTemperature})
-    return res.status(200).json(winesByTemp)
+    const { idealTemperature } = req.params;
+    const winesByTemp = await Wine.find({ idealTemperature: idealTemperature });
+    return res.status(200).json(winesByTemp);
   } catch (error) {
-    return res.status(400).json(`error at getWinesByTemperature: ${error}`)
+    return res.status(400).json(`error at getWinesByTemperature: ${error}`);
   }
-}
+};
 
 const getWinesByOrigin = async (req, res, next) => {
   try {
-    const { origin } = req.params
-    const winesByOrigin = await Wine.find({origin: origin})
-    return res.status(200).json(winesByOrigin)
+    const { origin } = req.params;
+    const winesByOrigin = await Wine.find({ origin: origin });
+    return res.status(200).json(winesByOrigin);
   } catch (error) {
-    return res.status(400).json(`error at getWinesByOrigin: ${error}`)
+    return res.status(400).json(`error at getWinesByOrigin: ${error}`);
   }
-}
+};
 
 const getWinesByScores = async (req, res, next) => {
   try {
-    const { scores } = req.params
+    const { scores } = req.params;
     //! NEED TO CHECK HOW TO CALCULATE THE AVERAGE SCORE
   } catch (error) {
-    return res.status(400).json(`error at getWinesByScore: ${error}`)
+    return res.status(400).json(`error at getWinesByScore: ${error}`);
   }
-}
+};
 
 //! PREPARE A PRICE FILTER GIVEN A MINMAX
 // find all documents named john and at least 18
@@ -75,62 +77,81 @@ const getWinesByScores = async (req, res, next) => {
 
 const deleteWineById = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const wineToDelete = await Wine.findById(id)
+    const { id } = req.params;
+    const wineToDelete = await Wine.findById(id);
 
-    const wineDeleted = await Wine.findByIdAndDelete(id)
+    const wineDeleted = await Wine.findByIdAndDelete(id);
 
-    return res.status(200).json(wineDeleted)
-
+    return res.status(200).json(wineDeleted);
   } catch (error) {
-    return res.status(400).json(`error at deleteWine: ${error}`)
+    return res.status(400).json(`error at deleteWine: ${error}`);
   }
-}
+};
 
 const createWine = async (req, res, next) => {
   try {
     const newWine = new Wine({
-      ...req.body
+      ...req.body,
     });
 
-    if(req.file){newWine.picture=req.file.path}
+    if (req.file) {
+      newWine.picture = req.file.path;
+    }
 
-    const wineDuplicated = await Wine.findOne({name: req.body.name})
-    if(wineDuplicated){return res.status(400).json(`that wine name already exists`)}
-    const wineSaved = await newWine.save()
-    return res.status(201).json(wineSaved)
+    const wineDuplicated = await Wine.findOne({ name: req.body.name });
+    if (wineDuplicated) {
+      return res.status(400).json(`that wine name already exists`);
+    }
+    const wineSaved = await newWine.save();
+    return res.status(201).json(wineSaved);
   } catch (error) {
-    return res.status(400).json(`error at createWine: ${error}`)
+    return res.status(400).json(`error at createWine: ${error}`);
   }
-}
+};
 
 const updateWineById = async (req, res, next) => {
   try {
-    const { id } = req.params
-    const wineToUpdate = await Wine.findById(id)
-    if(wineToUpdate.picture){deleteImgCloudinary(wineToUpdate.picture)}
+    const { id } = req.params;
+    const wineToUpdate = await Wine.findById(id);
+    if (wineToUpdate.picture) {
+      deleteImgCloudinary(wineToUpdate.picture);
+    }
 
     const newWine = new Wine({
-      name: req.body.name ,
-      brand: req.body.brand ,
-      picture: req.body.picture ,
-      taste: req.body.taste ,
-      color: req.body.color ,
-      idealTemperature: req.body.idealTemperature ,
-      origin: req.body.origin ,
-      scores: req.body.scores ,
-      price: req.body.price ,
-    })
+      name: req.body.name,
+      brand: req.body.brand,
+      picture: req.body.picture,
+      taste: req.body.taste,
+      color: req.body.color,
+      idealTemperature: req.body.idealTemperature,
+      origin: req.body.origin,
+      scores: req.body.scores,
+      price: req.body.price,
+    });
 
-    newWine._id = id
-    if(req.file){newWine.picture = req.file.path}
-    const updatedWine = await Wine.findByIdAndUpdate(id, newWine, {new: true})
+    newWine._id = id;
+    if (req.file) {
+      newWine.picture = req.file.path;
+    }
+    const updatedWine = await Wine.findByIdAndUpdate(id, newWine, {
+      new: true,
+    });
 
-    return res.status(200).json(updatedWine)
-
+    return res.status(200).json(updatedWine);
   } catch (error) {
-    return res.status(400).json(`error at updateWineById: ${error}`)
+    return res.status(400).json(`error at updateWineById: ${error}`);
   }
-}
+};
 
-module.exports = { createWine, getWines, getWineById, getWinesByTaste, getWinesByColor, getWinesByTemperature, getWinesByOrigin, getWinesByScores, deleteWineById, updateWineById }
+module.exports = {
+  createWine,
+  getWines,
+  getWineById,
+  getWinesByTaste,
+  getWinesByColor,
+  getWinesByTemperature,
+  getWinesByOrigin,
+  getWinesByScores,
+  deleteWineById,
+  updateWineById,
+};

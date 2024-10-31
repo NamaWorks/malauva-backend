@@ -1,136 +1,140 @@
-const mongoose = require("mongoose")
+const mongoose = require("mongoose");
 
-const User = require("../api/models/User.model")
-const Wine = require("../api/models/Wine.model")
-const Purchase = require("../api/models/Purchase.model")
+const User = require("../api/models/User.model");
+const Wine = require("../api/models/Wine.model");
+const Purchase = require("../api/models/Purchase.model");
 
 require("dotenv").config();
 
-const  feedData = async (dataToFeed, collection) => {
+const feedData = async (dataToFeed, collection) => {
   try {
     await mongoose
       .connect(process.env.DB_URL)
       .then(async () => {
         switch (collection) {
-          case 'users':
-            const allUsers = await User.find()
-            allUsers.length ? await User.collection.drop() : console.log("users collection already empty")
+          case "users":
+            const allUsers = await User.find();
+            allUsers.length
+              ? await User.collection.drop()
+              : console.log("users collection already empty");
             break;
 
-          case 'wines': 
-            const allWines = await Wine.find()
-            allWines.length ? await Wine.collection.drop() : console.log("wines collection already empty")
+          case "wines":
+            const allWines = await Wine.find();
+            allWines.length
+              ? await Wine.collection.drop()
+              : console.log("wines collection already empty");
             break;
 
-          case 'purchases': 
-            const allPurchases = await Purchase.find()
-            allPurchases.length ? await Purchase.collection.drop() : console.log("purchases collection already empty")
+          case "purchases":
+            const allPurchases = await Purchase.find();
+            allPurchases.length
+              ? await Purchase.collection.drop()
+              : console.log("purchases collection already empty");
             break;
 
           default:
-            console.log(`the collection '${collection}' is not registered`)
+            console.log(`the collection '${collection}' is not registered`);
             break;
         }
       })
-      .catch((err)=>{
-        console.log(`error emptying ${collection} collection: ${err}`)
-        process.exit()
+      .catch((err) => {
+        console.log(`error emptying ${collection} collection: ${err}`);
+        process.exit();
       })
 
       // ---------------------continue here----------------------------------
-      .then(async()=>{
-        switch(collection) {
-          case "users": 
-
-            const purchasesDb = await Purchase.find()
+      .then(async () => {
+        switch (collection) {
+          case "users":
+            const purchasesDb = await Purchase.find();
             for (const user in dataToFeed) {
-              let purchasesData = []
-              dataToFeed[user].purchases.forEach(purchase => {
-                purchasesDb.forEach((purchaseItem)=>{
-                  purchaseItem.idNumber == purchase && purchasesData.push((purchaseItem._id))
-                })
+              let purchasesData = [];
+              dataToFeed[user].purchases.forEach((purchase) => {
+                purchasesDb.forEach((purchaseItem) => {
+                  purchaseItem.idNumber == purchase &&
+                    purchasesData.push(purchaseItem._id);
+                });
               });
-              dataToFeed[user].purchases = purchasesData
+              dataToFeed[user].purchases = purchasesData;
             }
-            const winesDb = await Wine.find()
+            const winesDb = await Wine.find();
             for (const user in dataToFeed) {
-              let winesData = []
-              dataToFeed[user].scoresGiven.forEach(score => {
-                console.log(score)
-                winesDb.forEach((wine)=>{
-                  wine.idNumber == score && winesData.push(wine._id)
-                })
+              let winesData = [];
+              dataToFeed[user].scoresGiven.forEach((score) => {
+                console.log(score);
+                winesDb.forEach((wine) => {
+                  wine.idNumber == score && winesData.push(wine._id);
+                });
               });
-              dataToFeed[user].scoresGiven = winesData 
-              console.log(dataToFeed)
-          }
-          break;
+              dataToFeed[user].scoresGiven = winesData;
+              console.log(dataToFeed);
+            }
+            break;
 
           case "purchases":
-
-            const usersDb = await User.find()
-            for(const purchase in dataToFeed){
-              let usersData
-              usersDb.forEach((user)=>{
-                purchase.client == purchase.idNumber && (usersData=user._id)
-              })
-              dataToFeed[purchase].client = usersData
+            const usersDb = await User.find();
+            for (const purchase in dataToFeed) {
+              let usersData;
+              usersDb.forEach((user) => {
+                purchase.client == purchase.idNumber && (usersData = user._id);
+              });
+              dataToFeed[purchase].client = usersData;
             }
 
-            const winesDbPurchase = await Wine.find()
+            const winesDbPurchase = await Wine.find();
             for (const purchase in dataToFeed) {
-              let winesData = []
-              console.log(dataToFeed[purchase])
-              dataToFeed[purchase].itemsBought.forEach(item => {
-                console.log(item)
-                winesDbPurchase.forEach((wine)=>{
-                  wine.idNumber == item && winesData.push(wine._id)
-                })
+              let winesData = [];
+              console.log(dataToFeed[purchase]);
+              dataToFeed[purchase].itemsBought.forEach((item) => {
+                console.log(item);
+                winesDbPurchase.forEach((wine) => {
+                  wine.idNumber == item && winesData.push(wine._id);
+                });
               });
-              dataToFeed[purchase].itemsBought = winesData 
-              console.log(dataToFeed)
-          }
-  
-
+              dataToFeed[purchase].itemsBought = winesData;
+              console.log(dataToFeed);
+            }
         }
       })
-      .catch((error)=>{console.log(error)})
+      .catch((error) => {
+        console.log(error);
+      })
 
       // -----------------------from here to above is the collection connection for the purchase id ------------------------------------
 
       .then(async () => {
-        switch(collection) {
-          case 'users':
+        switch (collection) {
+          case "users":
+            console.log(dataToFeed);
 
-          console.log(dataToFeed)
-
-            await User.insertMany(dataToFeed)
-            console.log(`${collection} data uploaded to DB`)
+            await User.insertMany(dataToFeed);
+            console.log(`${collection} data uploaded to DB`);
             break;
 
-          case 'wines': 
-            await Wine.insertMany(dataToFeed)
-            console.log(`${collection} data uploaded to DB`)
+          case "wines":
+            await Wine.insertMany(dataToFeed);
+            console.log(`${collection} data uploaded to DB`);
             break;
 
-          case 'purchases': 
-            await Purchase.insertMany(dataToFeed)
-            console.log(`${collection} data uploaded to DB`)
+          case "purchases":
+            await Purchase.insertMany(dataToFeed);
+            console.log(`${collection} data uploaded to DB`);
             break;
 
           default:
-            console.log(`the collection '${collection}' is not registered`)
+            console.log(`the collection '${collection}' is not registered`);
             break;
         }
-        process.exit()
+        process.exit();
       })
       .catch((err) => {
-        console.log(`error uploading ${collection} to DB: ${err}`)
-        process.exit()
-      })
+        console.log(`error uploading ${collection} to DB: ${err}`);
+        process.exit();
+      });
   } catch (err) {
-    console.log(`error feeding the DB: ${err}`)
+    console.log(`error feeding the DB: ${err}`);
   }
-}
+};
 
-module.exports = { feedData }
+module.exports = { feedData };
