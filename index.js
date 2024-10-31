@@ -25,8 +25,12 @@ server.use("*", (req, res, next)=>{
   return res.status(404).json("no route for you today")
 })
 
-server.listen(3000,()=>{
-  console.log("server started at: http://localhost:3000")
-})
+const prepareServerForDev = () => {
+  server.listen(3000,()=>{
+    console.log("server started at: http://localhost:3000")
+  })
+}
+
+prepareServerForDev()
 
 module.exports = server

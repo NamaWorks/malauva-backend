@@ -92,3 +92,5 @@ describe('wines endpoints', ()=> {
   })  
   
 })
+
+// To avoid having the server running all the time, we can unable the server.listen(......) in the index.js file

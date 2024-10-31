@@ -4,7 +4,7 @@ const { verifyJwt } = require("../utils/jwt")
 const isAuth = async (req, res, next) => {
   try {
     const token = req.headers.authorization
-    !token ? res.status(400).json(`you're not authorised`) : console.log(`you're authorised`)
+    !token && res.status(400).json(`you're not authorised`)
 
     const parsedToken = token.replace("Bearer ", "")
     const { id } = verifyJwt(parsedToken)

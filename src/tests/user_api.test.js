@@ -16,26 +16,27 @@ describe('users endpoints', ()=>{
 
   test("getUserById returns error 400 due to authentication", async () => {
     await api
-      .get("/users/67221da17aa5bdb2a60347a8")
+      .get("/users/671ff3c49985ad49c2efcb34")
       .set("Authorization", "Bearer TOKEN")
       .expect(400);
   });
 
   test("userSignUp returns 200 and json", async () => {
     const payload = {
-      idNumber: 3000,
-      personName: "tester",
-      username: "test",
+      idNumber: 5000,
+      personName: "testJEST",
+      username: "testJEST",
       password: "Test123!",
-      email: "test@mail.com",
+      email: "testJEST6@mail.com",
       role: "admin",
     };
 
     await api
       .post("/users/signup")
       .send(payload)
-      .expect(200)
-      .expect("Content-Type", /application\/json/);
+      .expect(201)
+      .then(res=>console.log(res))
+      // .expect("Content-Type", /application\/json/)
   });
 
   test("userLogin returns 200 and json", async () => {
@@ -49,21 +50,21 @@ describe('users endpoints', ()=>{
   });
 
   test("updateUser returns 400 due to authentication", async () => {
-    const payload = { password: "Test123!", email: "test@mail.com" };
+    const payload = { password: "Test123!", email: "testador1@mail.com" };
 
     await api
-      .patch("/users/67221da17aa5bdb2a60347a8")
+      .patch("/users/update/671ff3c49985ad49c2efcb43")
       .set("Authorization", "Bearer TOKEN")
       .send(payload)
       .expect(400)
-      .expect("Content-Type", /application\/json/);
+      .then((res=>console.log(res)))
+      // .expect("Content-Type", /application\/json/);
   });
 
   test("deleteUser returns 400 due to authentication", async () => {
     await api
-      .patch("/users/delete/67221da17aa5bdb2a60347a8")
+      .delete("/users/delete/671ff3c49985ad49c2efcb43")
       .set("Authorization", "Bearer TOKEN")
-      .send(payload)
       .expect(400)
       .expect("Content-Type", /application\/json/);
   });

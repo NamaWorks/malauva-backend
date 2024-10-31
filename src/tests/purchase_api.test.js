@@ -1,7 +1,6 @@
 const mongoose  = require("mongoose");
 const supertest = require("supertest");
 const server = require("../../index.js");
-
 const api = supertest(server)
 
 describe('purchases endpoints', ()=>{
