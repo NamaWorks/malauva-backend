@@ -78,7 +78,10 @@ const getWinesByScores = async (req, res, next) => {
 const deleteWineById = async (req, res, next) => {
   try {
     const { id } = req.params;
+
     const wineToDelete = await Wine.findById(id);
+
+    wineToDelete.picture && deleteImgCloudinary(wineToDelete.picture);
 
     const wineDeleted = await Wine.findByIdAndDelete(id);
 

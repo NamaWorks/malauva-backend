@@ -5,8 +5,10 @@ const { CloudinaryStorage } = require("multer-storage-cloudinary");
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  folder: "MalaUva",
-  allowedFormats: ["jpg", "png", "jpeg", "gif"],
+  params: {
+    folder: "MalaUva",
+    allowedFormats: ["jpg", "png", "jpeg", "gif", "webp"],
+  },
 });
 
 const upload = multer({ storage });
@@ -24,7 +26,7 @@ const deleteImgCloudinary = (imgUrl) => {
 
 const configCloudinary = () => {
   cloudinary.config({
-    cloud_name: process.env.CLOUDINARY_API_NAME,
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_secret: process.env.CLOUDINARY_API_SECRET,
     api_key: process.env.CLOUDINARY_API_KEY,
   });
