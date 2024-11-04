@@ -3,7 +3,7 @@ const { parseSeedPurchases } = require("../utils/parseSeedsData.js");
 const { feedData } = require("./feedData.js");
 
 fs.readFile(
-  "./src/seeds/files/002_MalaUva_SeedFile-purchases.csv",
+  "./src/seeds/files/003_MalaUva_SeedFile-purchases.csv",
   "utf8",
   (error, data) => {
     error

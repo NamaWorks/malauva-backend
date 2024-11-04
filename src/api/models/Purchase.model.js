@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const purchaseSchema = new Schema(
   {
-    idNumber: { type: Number, required: true },
+    idNumber: { type: String, required: true },
     // client: { type: Number },  // remember to connect to User model
     client: { type: mongoose.Types.ObjectId, ref: "users", required: true },
     // itemsBought: [{ type: Number }], // remember to connect to WineWine model

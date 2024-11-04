@@ -62,13 +62,13 @@ const feedData = async (dataToFeed, collection) => {
             for (const user in dataToFeed) {
               let winesData = [];
               dataToFeed[user].scoresGiven.forEach((score) => {
-                console.log(score);
+                // console.log(score);
                 winesDb.forEach((wine) => {
                   wine.idNumber == score && winesData.push(wine._id);
                 });
               });
               dataToFeed[user].scoresGiven = winesData;
-              console.log(dataToFeed);
+              // console.log(dataToFeed);
             }
             break;
 
@@ -85,16 +85,34 @@ const feedData = async (dataToFeed, collection) => {
             const winesDbPurchase = await Wine.find();
             for (const purchase in dataToFeed) {
               let winesData = [];
-              console.log(dataToFeed[purchase]);
+              // console.log(dataToFeed[purchase]);
               dataToFeed[purchase].itemsBought.forEach((item) => {
-                console.log(item);
+                // console.log(item);
                 winesDbPurchase.forEach((wine) => {
                   wine.idNumber == item && winesData.push(wine._id);
                 });
               });
               dataToFeed[purchase].itemsBought = winesData;
-              console.log(dataToFeed);
+              // console.log(dataToFeed);
             }
+            break;
+
+          case "wines":
+            const usersDbForWines = await User.find();
+            for (const wine in dataToFeed) {
+              // console.log(dataToFeed[wine])
+              let usersData = [];
+              usersDbForWines.forEach((user) => {
+                dataToFeed[wine].scores.forEach((score) => {
+                  // console.log(score)
+                  score == user.idNumber && usersData.push(user._id);
+                  // score == user.idNumber && console.log(user._id)
+                });
+              });
+              dataToFeed[wine].scores = usersData;
+              // console.log(wine.scores)
+            }
+            break;
         }
       })
       .catch((error) => {
@@ -106,7 +124,7 @@ const feedData = async (dataToFeed, collection) => {
       .then(async () => {
         switch (collection) {
           case "users":
-            console.log(dataToFeed);
+            // console.log(dataToFeed);
 
             await User.insertMany(dataToFeed);
             console.log(`${collection} data uploaded to DB`);

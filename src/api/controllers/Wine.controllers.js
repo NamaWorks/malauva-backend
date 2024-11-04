@@ -146,6 +146,15 @@ const updateWineById = async (req, res, next) => {
   }
 };
 
+const populateWines = async (req, res, next) => {
+  try {
+    const wines = await Wine.find().populate("scores");
+    return res.status(200).json(`wines populated`);
+  } catch (error) {
+    return res.status(400).json(`error at populateWines: ${error}`);
+  }
+};
+
 module.exports = {
   createWine,
   getWines,
@@ -157,4 +166,5 @@ module.exports = {
   getWinesByScores,
   deleteWineById,
   updateWineById,
+  populateWines,
 };

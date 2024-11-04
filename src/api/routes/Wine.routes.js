@@ -13,6 +13,7 @@ const {
   deleteWineById,
   updateWineById,
   createWine,
+  populateWines,
 } = require("../controllers/Wine.controllers");
 
 const winesRouter = require("express").Router();
@@ -31,5 +32,6 @@ winesRouter.patch(
   upload.single("picture"),
   updateWineById,
 );
+winesRouter.get("/", populateWines);
 
 module.exports = winesRouter;

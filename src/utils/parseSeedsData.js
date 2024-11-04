@@ -87,7 +87,7 @@ const parseSeedWines = (data) => {
       this.color = color;
       this.idealTemperature = idealTemperature;
       this.origin = origin;
-      this.scores = scores.split("");
+      this.scores = scores.split(" ");
       this.price = price;
     }
   }

@@ -4,7 +4,7 @@ const Schema = mongoose.Schema;
 
 const wineSchema = new Schema(
   {
-    idNumber: { type: Number, required: true },
+    idNumber: { type: String, required: true },
     name: { type: String, required: true },
     brand: { type: String, required: false, default: "no-brand" },
     picture: { type: String, required: false, default: "" },
@@ -12,7 +12,7 @@ const wineSchema = new Schema(
     color: { type: String },
     idealTemperature: { type: Number, required: false },
     origin: { type: String, required: false },
-    scores: [{ type: Number }],
+    scores: [{ type: mongoose.Types.ObjectId, ref: "users", required: false }],
     price: { type: Number },
   },
   {
