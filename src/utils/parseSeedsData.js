@@ -70,10 +70,9 @@ const parseSeedWines = (data) => {
     constructor(
       idNumber,
       name,
-      brand,
+      description,
       picture,
       taste,
-      color,
       idealTemperature,
       origin,
       scores,
@@ -81,10 +80,9 @@ const parseSeedWines = (data) => {
     ) {
       this.idNumber = idNumber;
       this.name = name;
-      this.brand = brand;
+      this.description = description;
       this.picture = picture;
       this.taste = taste;
-      this.color = color;
       this.idealTemperature = idealTemperature;
       this.origin = origin;
       this.scores = scores.split(" ");
@@ -107,7 +105,6 @@ const parseSeedWines = (data) => {
         itemInfo[6],
         itemInfo[7],
         itemInfo[8],
-        itemInfo[9],
       ),
     );
   }

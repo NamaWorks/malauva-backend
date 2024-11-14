@@ -6,10 +6,9 @@ const wineSchema = new Schema(
   {
     idNumber: { type: String, required: true },
     name: { type: String, required: true },
-    brand: { type: String, required: false, default: "no-brand" },
+    description: { type: String, required: false, default: "no-description" },
     picture: { type: String, required: false, default: "" },
     taste: { type: String },
-    color: { type: String },
     idealTemperature: { type: Number, required: false },
     origin: { type: String, required: false },
     scores: [{ type: mongoose.Types.ObjectId, ref: "users", required: false }],
