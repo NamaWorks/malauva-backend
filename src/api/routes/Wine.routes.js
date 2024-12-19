@@ -14,12 +14,14 @@ const {
   updateWineById,
   createWine,
   populateWines,
+  getWineByIdNumber,
 } = require("../controllers/Wine.controllers");
 
 const winesRouter = require("express").Router();
 
 winesRouter.get("/", getWines);
 winesRouter.get("/:id", getWineById);
+winesRouter.get("/:idNumber", getWineByIdNumber);
 winesRouter.get("/taste/:taste", getWinesByTaste);
 winesRouter.get("/color/:color", getWinesByColor);
 winesRouter.get("/temperature/:idealTemperature", getWinesByTemperature);

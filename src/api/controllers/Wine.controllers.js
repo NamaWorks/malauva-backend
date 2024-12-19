@@ -22,6 +22,16 @@ const getWineById = async (req, res, next) => {
   }
 };
 
+const getWineByIdNumber = async (req, res, next) => {
+  try {
+    const { idNumber } = req.params;
+    const wine = await Wine.findOne({idNumber});
+    return res.status(200).json(wine);
+  } catch (error) {
+    return res.status(400).json(`error at getWineById: ${error}`);
+  }
+};
+
 const getWinesByTaste = async (req, res, next) => {
   try {
     const { taste } = req.params;
@@ -159,6 +169,7 @@ module.exports = {
   createWine,
   getWines,
   getWineById,
+  getWineByIdNumber,
   getWinesByTaste,
   getWinesByColor,
   getWinesByTemperature,
