@@ -12,8 +12,8 @@ const parseSeedUsers = (data) => {
       paymentMethods,
       adresses,
       vatNumber,
-      lastConnection,
       role,
+      lastConnection,
       scoresGiven,
       phoneNumber,
     ) {
@@ -31,8 +31,8 @@ const parseSeedUsers = (data) => {
         .replace("address: ", "")
         .trimStart();
       this.vatNumber = vatNumber;
-      this.lastConnection = lastConnection ? lastConnection : new Date();
       this.role = role == "admin" ? (role = "admin") : (role = "user");
+      this.lastConnection = lastConnection ? lastConnection : new Date();
       this.scoresGiven = scoresGiven.replace("\r", "").split(" ");
       this.phoneNumber = phoneNumber;
     }
@@ -44,18 +44,18 @@ const parseSeedUsers = (data) => {
     const itemInfo = arr[i].split(";");
     usersArr.push(
       new user(
-        itemInfo[0],
-        itemInfo[1],
-        itemInfo[2],
-        itemInfo[3],
-        itemInfo[4],
-        itemInfo[5],
-        itemInfo[6],
-        itemInfo[7],
-        itemInfo[8],
-        itemInfo[9],
-        itemInfo[10],
-        itemInfo[11],
+        itemInfo[0], //idNumber
+        itemInfo[1], // personName
+        itemInfo[2], // username
+        itemInfo[3], // password
+        itemInfo[4], // purchases
+        itemInfo[5], // paymentMethods
+        itemInfo[6], // adresses
+        itemInfo[7], // vatNumber
+        itemInfo[8], // role
+        itemInfo[9], // lastConnection
+        itemInfo[10], // scoresGiven
+        itemInfo[11], // phoneNumber
         itemInfo[12] || 0,
       ),
     );
