@@ -25,7 +25,6 @@ const getWineById = async (req, res, next) => {
 const getWineByIdNumber = async (req, res, next) => {
   try {
     const { idNumber } = req.params;
-    console.log(req.params)
     const wine = await Wine.findOne({ idNumber: idNumber });
     return res.status(200).json(wine);
   } catch (error) {
