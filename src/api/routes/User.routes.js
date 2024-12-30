@@ -8,11 +8,13 @@ const {
   deleteUser,
   updateUser,
   populateUsers,
+  getLastIdNumber,
 } = require("../controllers/User.controllers");
 
 const userRouter = require("express").Router();
 
 userRouter.get("/", [isAdmin], getUsers);
+userRouter.get("/lastid", getLastIdNumber);
 userRouter.get("/:id", [isAdmin], getUserById);
 userRouter.post("/login", userLogin);
 userRouter.post("/signup", userSignup);

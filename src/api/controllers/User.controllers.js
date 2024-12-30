@@ -21,6 +21,15 @@ const getUserById = async (req, res, next) => {
   }
 };
 
+const getLastIdNumber = async (req, res, next) => {
+  try {
+    const users = await User.find();
+    return res.status(200).json(users[users.length-1].idNumber);
+  } catch (error) {
+    return res.status(400).json(`failed at getUserById: ${error}`);
+  }
+};
+
 const userLogin = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
@@ -109,4 +118,5 @@ module.exports = {
   deleteUser,
   updateUser,
   populateUsers,
+  getLastIdNumber,
 };
