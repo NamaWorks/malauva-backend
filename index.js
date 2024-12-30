@@ -7,12 +7,12 @@ const purchasesRouter = require("./src/api/routes/Purchase.routes");
 const winesRouter = require("./src/api/routes/Wine.routes");
 const { configCloudinary } = require("./src/middlewares/files.middleware");
 
-// with the next line we allow our server to use cross origin resources
-server.use(cors());
 
 const server = express();
 
 connectDB();
+// with the next line we allow our server to use cross origin resources
+server.use(cors());
 // with the next line we allow our app to read .json data
 server.use(express.json());
 // with the next line we initialize the Cloudinary connection configuration
