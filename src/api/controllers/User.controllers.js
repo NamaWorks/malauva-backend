@@ -47,7 +47,6 @@ const userLogin = async (req, res, next) => {
 
 const userSignup = async (req, res, next) => {
   try {
-    console.log(req.body)
     const newUser = new User({ ...req.body });
 
     const userDuplicated = await User.findOne({ email: req.body.email });
