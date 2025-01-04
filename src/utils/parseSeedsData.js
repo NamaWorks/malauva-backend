@@ -1,3 +1,5 @@
+const bcrypt = require("bcrypt");
+
 const parseSeedUsers = (data) => {
   const arr = data.split("\n");
 
@@ -21,7 +23,7 @@ const parseSeedUsers = (data) => {
       this.personName = personName.replaceAll(",", "").replaceAll(`"`, "");
       this.username = username.replaceAll(",", "").replaceAll(`"`, "");
       this.email = email.replaceAll(",", "").replaceAll(`"`, "");
-      this.password = password;
+      this.password = bcrypt.hashSync(password, 10);
       this.purchases = purchases.split(" ");
       this.paymentMethods = paymentMethods;
       this.adresses = adresses
