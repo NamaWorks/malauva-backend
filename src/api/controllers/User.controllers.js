@@ -33,13 +33,13 @@ const getLastIdNumber = async (req, res, next) => {
 const userLogin = async (req, res, next) => {
   try {
     const user = await User.findOne({ email: req.body.email });
+    console.log(user)
 
-    if (user) {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const token = generateSign(user._id);
         return res.status(200).json({ user, token });
       }
-    }
+
   } catch (error) {
     return res.status(400).json(`failed at userLogin: ${error}`);
   }
