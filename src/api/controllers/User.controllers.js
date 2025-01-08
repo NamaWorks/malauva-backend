@@ -11,6 +11,24 @@ const getUsers = async (req, res, next) => {
   }
 };
 
+
+const getUserDataFromToken = async (req, res, next) => {
+  try {
+    // const token = req.headers.authorization
+    // console.log(req.user.idNumber)
+    // const token = req.headers.authorization
+    // console.log(token)
+    // return res.status(200).json(`token: ${token}`)
+    const user = new User(req.user)
+    user.password = null;
+    user._id = null;
+    user.role = null;
+    return res.status(200).json(user)
+  } catch (error) {
+    return res.status(400).json(`error at getUserDataFromToken: ${error}`)
+  }
+}
+
 const getUserById = async (req, res, next) => {
   try {
     const { id } = req.params;
@@ -118,4 +136,5 @@ module.exports = {
   updateUser,
   populateUsers,
   getLastIdNumber,
+  getUserDataFromToken
 };
