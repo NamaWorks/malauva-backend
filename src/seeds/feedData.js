@@ -100,14 +100,6 @@ const feedData = async (dataToFeed, collection) => {
           const winesDb = await Wine.find();
           for (const user in dataToFeed) {
             let winesData = [];
-            dataToFeed[user].scoresGiven.forEach((score) => {
-              // console.log(score);
-              winesDb.forEach((wine) => {
-                wine.idNumber == score && winesData.push(wine._id);
-              });
-            });
-            dataToFeed[user].scoresGiven = winesData;
-            // console.log(dataToFeed);
           }
           break;
 

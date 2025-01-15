@@ -11,7 +11,6 @@ const wineSchema = new Schema(
     taste: { type: String },
     idealTemperature: { type: Number, required: false },
     origin: { type: String, required: false },
-    scores: [{ type: mongoose.Types.ObjectId, ref: "users", required: false }],
     price: { type: Number },
   },
   {

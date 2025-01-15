@@ -17,6 +17,7 @@ const userRouter = require("express").Router();
 userRouter.get("/", [isAdmin], getUsers);
 userRouter.get("/lastid", getLastIdNumber);
 userRouter.get("/profile",[isAuth], getUserDataFromToken);
+userRouter.get("/cart",[isAuth], getUserDataFromToken);
 userRouter.get("/id/:id", [isAdmin], getUserById);
 userRouter.post("/login", userLogin);
 userRouter.post("/signup", userSignup);

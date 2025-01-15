@@ -114,7 +114,7 @@ const updateUser = async (req, res, next) => {
 
 const populateUsers = async (req, res, next) => {
   try {
-    const users = await User.find().populate(["scoresGiven", "purchases"]);
+    const users = await User.find().populate(["scoresGiven", "purchases", "cartItems"]);
     return res.sftatus(200).json("users populated");
   } catch (error) {
     return next(error);

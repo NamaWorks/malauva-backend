@@ -16,8 +16,8 @@ const parseSeedUsers = (data) => {
       vatNumber,
       role,
       lastConnection,
-      scoresGiven,
       phoneNumber,
+      cartItems
     ) {
       this.idNumber = idNumber;
       this.personName = personName.replaceAll(",", "").replaceAll(`"`, "");
@@ -35,33 +35,37 @@ const parseSeedUsers = (data) => {
       this.vatNumber = vatNumber;
       this.role = role == "admin" ? (role = "admin") : (role = "user");
       this.lastConnection = lastConnection ? lastConnection : new Date();
-      this.scoresGiven = scoresGiven.replace("\r", "").split(" ");
       this.phoneNumber = phoneNumber;
+      this.cartItems = cartItems?.replaceAll(`""`, `"`).replaceAll(`\r`, ``).split(" ") || '{"itemData": "", "numberOfItems":"0"}'
     }
   }
 
   let usersArr = [];
 
-  for (let i = 1; i < arr.length; i++) {
+  for (let i = 1; i < arr.length-1; i++) {
+    // remember to have an empty line at the end in the seed csv file
+  // for (let i = 1; i < 4; i++) {
     const itemInfo = arr[i].split(";");
     usersArr.push(
       new user(
         itemInfo[0], //idNumber
         itemInfo[1], // personName
         itemInfo[2], // username
-        itemInfo[3], // password
-        itemInfo[4], // purchases
-        itemInfo[5], // paymentMethods
-        itemInfo[6], // adresses
-        itemInfo[7], // vatNumber
-        itemInfo[8], // role
-        itemInfo[9], // lastConnection
-        itemInfo[10], // scoresGiven
-        itemInfo[11], // phoneNumber
-        itemInfo[12] || 0,
+        itemInfo[3], // email
+        itemInfo[4], // password
+        itemInfo[5], // purchases
+        itemInfo[6], // paymentMethods
+        itemInfo[7], // adresses
+        itemInfo[8], // vatNumber
+        itemInfo[9], // role
+        itemInfo[10], // lastConnection
+        itemInfo[12], // cartItems
+        itemInfo[11] || 0, // phoneNumber
       ),
     );
+    // console.log(arr[i].split(`;`))
   }
+  // console.log(usersArr)
   return usersArr;
 };
 
@@ -77,7 +81,6 @@ const parseSeedWines = (data) => {
       taste,
       idealTemperature,
       origin,
-      scores,
       price,
     ) {
       this.idNumber = idNumber;
@@ -87,7 +90,6 @@ const parseSeedWines = (data) => {
       this.taste = taste;
       this.idealTemperature = idealTemperature;
       this.origin = origin;
-      this.scores = scores.split(" ");
       this.price = price;
     }
   }
@@ -96,6 +98,7 @@ const parseSeedWines = (data) => {
 
   for (let i = 1; i < arr.length; i++) {
     const itemInfo = arr[i].split(";");
+    console.log(itemInfo)
     winesArr.push(
       new wine(
         itemInfo[0],
@@ -106,7 +109,6 @@ const parseSeedWines = (data) => {
         itemInfo[5],
         itemInfo[6],
         itemInfo[7],
-        itemInfo[8],
       ),
     );
   }

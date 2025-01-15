@@ -13,18 +13,12 @@ const userSchema = new Schema(
     purchases: [
       { type: mongoose.Types.ObjectId, ref: "purchases", required: false },
     ],
-    cartItems: [{
-      itemData: {type: mongoose.Types.ObjectId, ref: "wines"},
-      numberOfitems: {type: number}
-    }],
     paymentMethods: [{ type: String }],
     addresses: [{ type: String }],
     vatNumber: { type: String },
     lastConnection: { type: String },
     role: { type: String, required: false, default: "user" },
-    scoresGiven: [
-      { type: mongoose.Types.ObjectId, ref: "wines", required: false },
-    ],
+    cartItems: [{ type: String, default: '{"itemData": "", "numberOfItems":"0"}' }],
     phoneNumber: { type: Number, default: 0 },
   },
   {
