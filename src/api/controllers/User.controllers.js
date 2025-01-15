@@ -14,16 +14,10 @@ const getUsers = async (req, res, next) => {
 
 const getUserDataFromToken = async (req, res, next) => {
   try {
-    // const token = req.headers.authorization
-    // console.log(req.user.idNumber)
-    // const token = req.headers.authorization
-    // console.log(token)
-    // return res.status(200).json(`token: ${token}`)
-    const user = new User(req.user)
-    user.password = null;
-    user._id = null;
-    user.role = null;
-    return res.status(200).json(user)
+    req.user.password = null;
+    req.user._id = null;
+    req.user.role = null;
+    return res.status(200).json(req.user)
   } catch (error) {
     return res.status(400).json(`error at getUserDataFromToken: ${error}`)
   }
@@ -121,7 +115,7 @@ const updateUser = async (req, res, next) => {
 const populateUsers = async (req, res, next) => {
   try {
     const users = await User.find().populate(["scoresGiven", "purchases"]);
-    return res.status(200).json("users populated");
+    return res.sftatus(200).json("users populated");
   } catch (error) {
     return next(error);
   }
