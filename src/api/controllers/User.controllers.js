@@ -15,7 +15,7 @@ const getUsers = async (req, res, next) => {
 const getUserDataFromToken = async (req, res, next) => {
   try {
     req.user.password = null;
-    req.user._id = null;
+    // req.user._id = null;
     req.user.role = null;
     return res.status(200).json(req.user)
   } catch (error) {
@@ -49,8 +49,8 @@ const userLogin = async (req, res, next) => {
       if (bcrypt.compareSync(req.body.password, user.password)) {
         const token = generateSign(user._id);
         return res.status(200).json({ user, token });
-      }
-
+      } else { return res.status(400).json(`access denied`)}
+ 
   } catch (error) {
     return res.status(400).json(`failed at userLogin: ${error}`);
   }
@@ -78,6 +78,7 @@ const deleteUser = async (req, res, next) => {
     const userDeleted = await User.findByIdAndDelete(id);
 
     return res.status(200).json(userDeleted);
+    // return res.status(200).json(id);
   } catch (error) {
     return res.status(400).json(`error at deleteUser: ${error}`);
   }
@@ -115,7 +116,7 @@ const updateUser = async (req, res, next) => {
 const populateUsers = async (req, res, next) => {
   try {
     const users = await User.find().populate(["scoresGiven", "purchases", "cartItems"]);
-    return res.sftatus(200).json("users populated");
+    return res.status(200).json("users populated");
   } catch (error) {
     return next(error);
   }

@@ -1,5 +1,5 @@
 ﻿idNumber;personName;username;email;password;purchases;paymentMethods;adresses;vatNumber;role;lastConnection;cartItems
-U0000;"""Admin"",";"""admin"",";"""admin@admin.com"",";admin123!@;;;"{""-""},";;admin;;{""itemData"":""W0001"",""numberOfItems"":""4""} {""itemData"":""W0002"",""numberOfItems"":""6""}
+U0000;"""Admin"",";"""admin"",";"""admin@admin.com"",";admin123!@;;;"{""-""},";;admin;;{""itemData"":""W0001"",""numberOfItems"":4} {""itemData"":""W0002"",""numberOfItems"":6}
 U0001;"""Liam Smith"",";"""SkyWalker123"",";"""john.doe@example.com"",";passwordTest123!@;P0001;;"{""address"": ""123 Main St, Jerez de la Frontera, Andalucía, España""},";4324625;client;;
 U0002;"""Olivia Johnson"",";"""OceanBreeze45"",";"""jane.smith@example.com"",";passwordTest123!@;P0002;;"  {""address"": ""456 Elm St, Madrid, Comunidad de Madrid, España""},";4141125;client;;
 U0003;"""Noah Williams"",";"""MysticMoon88"",";"""michael.brown@example.com"",";passwordTest123!@;P0003;;"  {""address"": ""789 Oak St, Barcelona, Cataluña, España""},";4118921;client;;

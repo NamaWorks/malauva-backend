@@ -19,14 +19,23 @@ const getPurchaseById = async (req, res, next) => {
   }
 };
 
+const getLastIdNumber = async (req, res, next) => {
+  try {
+    const purchases = await Purchase.find();
+    // console.log(purchases)
+    return res.status(200).json(purchases[purchases.length-1].idNumber);
+    // return res.status(200).json(purchases);
+  } catch (error) {
+    return res.status(400).json(`failed at getLastIdNumber: ${error}`);
+  }
+};
+
 const createPurchase = async (req, res, next) => {
   try {
     const newPurchase = new Purchase({
       ...req.body,
     });
-
     const purchaseSaved = await newPurchase.save();
-
     return res.status(201).json(purchaseSaved);
   } catch (error) {
     return res.status(400).json(`failed at createPurchase: ${error}`);
@@ -74,6 +83,7 @@ const populatePurchases = async (req, res, next) => {
 module.exports = {
   getPurchases,
   getPurchaseById,
+  getLastIdNumber,
   deletePurchase,
   updatePurchase,
   createPurchase,

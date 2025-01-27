@@ -7,12 +7,14 @@ const {
   updatePurchase,
   createPurchase,
   populatePurchases,
+  getLastIdNumber,
 } = require("../controllers/Purchase.controllers");
 
 const purchasesRouter = require("express").Router();
 
-purchasesRouter.get("/", [isAuth], getPurchases);
-purchasesRouter.get("/:id", [isAuth], getPurchaseById);
+purchasesRouter.get("/", [isAdmin], getPurchases);
+purchasesRouter.get("/lastid", [isAuth], getLastIdNumber);
+purchasesRouter.get("/id/:id", [isAuth], getPurchaseById);
 purchasesRouter.post("/create", [isAuth], createPurchase);
 purchasesRouter.delete("/:id", [isAdmin], deletePurchase);
 purchasesRouter.patch("/:id", [isAuth], updatePurchase);

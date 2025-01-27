@@ -18,7 +18,7 @@ const userSchema = new Schema(
     vatNumber: { type: String },
     lastConnection: { type: String },
     role: { type: String, required: false, default: "user" },
-    cartItems: [{ type: String, default: '{"itemData": "", "numberOfItems":"0"}' }],
+    cartItems: [{ type: String }],
     phoneNumber: { type: Number, default: 0 },
   },
   {
