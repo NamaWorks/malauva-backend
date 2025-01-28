@@ -35,6 +35,7 @@ const createPurchase = async (req, res, next) => {
     const newPurchase = new Purchase({
       ...req.body,
     });
+    console.log(req.body)
     const purchaseSaved = await newPurchase.save();
     return res.status(201).json(purchaseSaved);
   } catch (error) {

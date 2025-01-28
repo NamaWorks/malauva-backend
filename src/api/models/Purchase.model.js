@@ -2,15 +2,21 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+const itemBoughtSchema = new Schema(
+  {
+    object: { type: mongoose.Types.ObjectId, ref: "wines", required: true },
+    numberOfItems: { type: Number, required: true}
+  }
+)
+
 const purchaseSchema = new Schema(
   {
     idNumber: { type: String, required: true },
-    // client: { type: Number },  // remember to connect to User model
     client: { type: mongoose.Types.ObjectId, ref: "users", required: true },
-    // itemsBought: [{ type: Number }], // remember to connect to WineWine model
-    itemsBought: [
-      { type: mongoose.Types.ObjectId, ref: "wines", required: true },
-    ],
+    // itemsBought: [
+    //   { type: mongoose.Types.ObjectId, ref: "wines", required: true },
+    // ],
+    itemsBought: [ itemBoughtSchema ],
     totalSpent: { type: Number },
     paymentMethod: { type: String },
     address: { type: String },
