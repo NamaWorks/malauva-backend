@@ -14,9 +14,9 @@ const getUsers = async (req, res, next) => {
 
 const getUserDataFromToken = async (req, res, next) => {
   try {
-    req.user.password = null;
+    // req.user.password = null;
     // req.user._id = null;
-    req.user.role = null;
+    // req.user.role = null;
     return res.status(200).json(req.user)
   } catch (error) {
     return res.status(400).json(`error at getUserDataFromToken: ${error}`)
