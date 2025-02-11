@@ -94,10 +94,10 @@ const updateUser = async (req, res, next) => {
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
-      // password: bcrypt.hashSync(req.body.password, 10),
-      moneySpent: req.body.moneySpent,
-      paymentMethods: req.body.paymentMethods,
-      addresses: req.body.addresses,
+      password: bcrypt.hashSync(req.body.password, 10),
+      // moneySpent: req.body.moneySpent,
+      // paymentMethods: req.body.paymentMethods,
+      // addresses: req.body.addresses,
       vatNumber: req.body.vatNumber,
       lastConnection: req.body.lastConnection,
       ...req.body,
@@ -110,6 +110,22 @@ const updateUser = async (req, res, next) => {
     return res.status(200).json(updatedUser);
   } catch (error) {
     return res.status(400).json(`error at updateUser: ${error}`);
+  }
+};
+
+const patchUser = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const updates = req.body;
+
+    if (updates.password) {
+      updates.password = bcrypt.hashSync(updates.password, 10);
+    }
+
+    const updatedUser = await User.findByIdAndUpdate(id, { $set: updates }, { new: true });
+    return res.status(200).json(updatedUser);
+  } catch (error) {
+    return res.status(400).json(`error at patchUser: ${error}`);
   }
 };
 
@@ -131,5 +147,6 @@ module.exports = {
   updateUser,
   populateUsers,
   getLastIdNumber,
-  getUserDataFromToken
+  getUserDataFromToken,
+  patchUser
 };

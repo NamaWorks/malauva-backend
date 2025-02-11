@@ -10,6 +10,7 @@ const {
   populateUsers,
   getLastIdNumber,
   getUserDataFromToken,
+  patchUser,
 } = require("../controllers/User.controllers");
 
 const userRouter = require("express").Router();
@@ -22,7 +23,8 @@ userRouter.get("/id/:id", [isAdmin], getUserById);
 userRouter.post("/login", userLogin);
 userRouter.post("/signup", userSignup);
 userRouter.delete("/delete/:id", [isAuth], deleteUser);
-userRouter.patch("/update/:id", [isAuth], updateUser);
+// userRouter.patch("/update/:id", [isAuth], updateUser); <- this one would be a put endpoint, as it modifies the whole User
+userRouter.patch("/update/:id", [isAuth], patchUser);
 userRouter.get("/", populateUsers);
 
 module.exports = userRouter;
