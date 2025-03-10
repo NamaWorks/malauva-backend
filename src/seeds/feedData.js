@@ -11,15 +11,20 @@ require("dotenv").config();
 configCloudinary();
 
 const feedData = async (dataToFeed, collection) => {
-
+  
   let wineCollectionAfterUploadingImg = []
+
+  const collectionSetter = {
+    users: User,
+    wines: Wine,
+    purchases: Purchase,
+  }
 
   try {
   await mongoose
     .connect(process.env.DB_URL)
       .then(async () => {
-        switch (collection) {
-          case "wines":
+        if(collection === "wines") {
 
             await cloudinary.api.delete_resources_by_prefix(
               "MalaUva",
@@ -50,33 +55,15 @@ const feedData = async (dataToFeed, collection) => {
             }
         }
       })
+      .catch((err) => {
+        console.log(`error removing images from cloudinary: ${err}`)
+      })
     .then(async () => {
-      switch (collection) {
-        case "users":
-          const allUsers = await User.find();
-          allUsers.length
-            ? await User.collection.drop()
-            : console.log("users collection already empty");
-          break;
+      const allRecords = await collectionSetter[collection].find();
+        allRecords.length
+          ? await collectionSetter[collection].collection.drop()
+          : console.log(`${collection} collection already empty`)
 
-        case "wines":
-          const allWines = await Wine.find();
-          allWines.length
-            ? await Wine.collection.drop()
-            : console.log("wines collection already empty");
-          break;
-
-        case "purchases":
-          const allPurchases = await Purchase.find();
-          allPurchases.length
-            ? await Purchase.collection.drop()
-            : console.log("purchases collection already empty");
-          break;
-
-        default:
-          console.log(`the collection '${collection}' is not registered`);
-          break;
-      }
     })
     .catch((err) => {
       console.log(`error emptying ${collection} collection: ${err}`);
@@ -84,6 +71,7 @@ const feedData = async (dataToFeed, collection) => {
     })
 
     .then(async () => {
+
       switch (collection) {
         case "users":
           const purchasesDb = await Purchase.find();
@@ -149,28 +137,10 @@ const feedData = async (dataToFeed, collection) => {
     })
 
     .then(async () => {
-      switch (collection) {
-        case "users":
-          // console.log(dataToFeed);
 
-          await User.insertMany(dataToFeed);
-          console.log(`${collection} data uploaded to DB`);
-          break;
+      await collectionSetter[collection].insertMany(dataToFeed);
+      console.log(`${collection} data uploaded to DB`)
 
-        case "wines":
-          await Wine.insertMany(wineCollectionAfterUploadingImg);
-          console.log(`${collection} data uploaded to DB`);
-          break;
-
-        case "purchases":
-          await Purchase.insertMany(dataToFeed);
-          console.log(`${collection} data uploaded to DB`);
-          break;
-
-        default:
-          console.log(`the collection '${collection}' is not registered`);
-          break;
-      }
       process.exit();
     })
     .catch((err) => {

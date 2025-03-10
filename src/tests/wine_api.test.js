@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 const server = require("../../index.js");
+const { wineTestPayload, modifiedWineTestPayload } = require("../data/mockData.js");
 
 const api = supertest(server);
 
@@ -61,12 +62,7 @@ describe("wines endpoints", () => {
   });
 
   test("createWine returns error 400 due to authentication", async () => {
-    const payload = {
-      name: "vino de prueba",
-      brand: "marca de prueba",
-      taste: "J",
-      price: 45,
-    };
+    const payload = wineTestPayload;
 
     await api
       .post("/wines/create")
@@ -89,12 +85,7 @@ describe("wines endpoints", () => {
   });
 
   test("updateWine returns error 400 due to authentication", async () => {
-    const payload = {
-      name: "vino de prueba modificado",
-      brand: "marca de prueba modificado",
-      taste: "Joselito",
-      price: 60,
-    };
+    const payload = modifiedWineTestPayload
     await api
       .patch("/wines/update/671ff3c1964e93bb20d0210b")
       .set("Authorization", "Bearer TOKEN")

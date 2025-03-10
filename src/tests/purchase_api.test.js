@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 const server = require("../../index.js");
+const { purchaseTestPayload } = require("../data/mockData.js");
 const api = supertest(server);
 
 describe("purchases endpoints", () => {
@@ -24,12 +25,7 @@ describe("purchases endpoints", () => {
   }, 10000);
 
   test("createPurchase returns error 400 due to authentication", async () => {
-    const payload = {
-      idNumber: 4200,
-      client: 2020,
-      itemsBought: [1020, 1021, 1022],
-      status: "delivered",
-    };
+    const payload = purchaseTestPayload
     await api
       .post("/wines/create")
       .set("Authorization", "Bearer TOKEN")

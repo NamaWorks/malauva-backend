@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const supertest = require("supertest");
 const server = require("../../index.js");
+const { userTestPayload } = require("../data/mockData.js");
 
 const api = supertest(server);
 
@@ -21,14 +22,7 @@ describe("users endpoints", () => {
   });
 
   test("userSignUp returns 200 and json", async () => {
-    const payload = {
-      idNumber: 5000,
-      personName: "testJEST",
-      username: "testJEST",
-      password: "Test123!",
-      email: "testJEST6@mail.com",
-      role: "admin",
-    };
+    const payload = userTestPayload
 
     await api
       .post("/users/signup")
