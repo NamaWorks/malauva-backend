@@ -6,9 +6,10 @@ const { isAdmin } = require("../../middlewares/isAdmin");
 const {
   getWines,
   getWineById,
-  getWinesByTaste,
-  getWinesByColor,
-  getWinesByTemperature,
+  // getWinesByTaste,
+  // getWinesByColor,
+  // getWinesByTemperature,
+  getWinesByFilters,
   getWinesByOrigin,
   deleteWineById,
   updateWineById,
@@ -22,9 +23,10 @@ const winesRouter = require("express").Router();
 winesRouter.get("/", getWines);
 winesRouter.get("/:id", getWineById);
 winesRouter.get("/idNumber/:idNumber", getWineByIdNumber);
-winesRouter.get("/taste/:taste", getWinesByTaste);
-winesRouter.get("/color/:color", getWinesByColor);
-winesRouter.get("/temperature/:idealTemperature", getWinesByTemperature);
+// winesRouter.get("/taste/:taste", getWinesByTaste);
+// winesRouter.get("/color/:color", getWinesByColor);
+// winesRouter.get("/temperature/:idealTemperature", getWinesByTemperature);
+winesRouter.post("/filter", getWinesByFilters)
 winesRouter.get("/origin/:origin", getWinesByOrigin);
 winesRouter.post("/create", [isAdmin], upload.single("picture"), createWine);
 winesRouter.delete("/remove/:id", [isAdmin], deleteWineById);

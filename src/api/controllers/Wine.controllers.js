@@ -32,35 +32,67 @@ const getWineByIdNumber = async (req, res, next) => {
   }
 };
 
-const getWinesByTaste = async (req, res, next) => {
+const getWinesByFilters = async (req, res, next) => {
   try {
-    const { taste } = req.params;
-    const winesByTaste = await Wine.find({ taste: taste });
-    return res.status(200).json(winesByTaste);
-  } catch (error) {
-    return res.status(400).json(`error at getWinesByTaste: ${error}`);
-  }
-};
+    const  payload  = {...req.body}
+    console.log(payload)
 
-const getWinesByColor = async (req, res, next) => {
-  try {
-    const { color } = req.params;
-    const winesByColor = await Wine.find({ color: color });
-    return res.status(200).json(winesByColor);
-  } catch (error) {
-    return res.status(400).json(`error at getWinesByColor: ${error}`);
-  }
-};
+    const keys = ['origin', 'taste', 'temperature', 'price']
 
-const getWinesByTemperature = async (req, res, next) => {
-  try {
-    const { idealTemperature } = req.params;
-    const winesByTemp = await Wine.find({ idealTemperature: idealTemperature });
-    return res.status(200).json(winesByTemp);
-  } catch (error) {
-    return res.status(400).json(`error at getWinesByTemperature: ${error}`);
+    const query = {};
+
+    keys.forEach((key)=>{
+      if(payload[key]){
+        if(key === 'temperature'){
+            query.idealTemperature = {$lte: payload[key]}
+          } else if (key === 'price'){
+            query[key] = {$lte:payload[key]}
+          } else {
+            query[key] = payload[key]
+          }
+        }
+    })
+
+
+    console.log(query)
+
+    const wines = await Wine.find(query)
+    console.log(payload)
+    return res.status(200).json(wines)
+  } catch (err) {
+    return res.status(400).json(`error at getWinesByFilters`)
   }
-};
+}
+
+// const getWinesByTaste = async (req, res, next) => {
+//   try {
+//     const { taste } = req.params;
+//     const winesByTaste = await Wine.find({ taste: taste });
+//     return res.status(200).json(winesByTaste);
+//   } catch (error) {
+//     return res.status(400).json(`error at getWinesByTaste: ${error}`);
+//   }
+// };
+
+// const getWinesByColor = async (req, res, next) => {
+//   try {
+//     const { color } = req.params;
+//     const winesByColor = await Wine.find({ color: color });
+//     return res.status(200).json(winesByColor);
+//   } catch (error) {
+//     return res.status(400).json(`error at getWinesByColor: ${error}`);
+//   }
+// };
+
+// const getWinesByTemperature = async (req, res, next) => {
+//   try {
+//     const { idealTemperature } = req.params;
+//     const winesByTemp = await Wine.find({ idealTemperature: idealTemperature });
+//     return res.status(200).json(winesByTemp);
+//   } catch (error) {
+//     return res.status(400).json(`error at getWinesByTemperature: ${error}`);
+//   }
+// };
 
 const getWinesByOrigin = async (req, res, next) => {
   try {
@@ -170,9 +202,10 @@ module.exports = {
   getWines,
   getWineById,
   getWineByIdNumber,
-  getWinesByTaste,
-  getWinesByColor,
-  getWinesByTemperature,
+  // getWinesByTaste,
+  // getWinesByColor,
+  // getWinesByTemperature,
+  getWinesByFilters,
   getWinesByOrigin,
   getWinesByScores,
   deleteWineById,
