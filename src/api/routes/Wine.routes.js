@@ -6,11 +6,7 @@ const { isAdmin } = require("../../middlewares/isAdmin");
 const {
   getWines,
   getWineById,
-  // getWinesByTaste,
-  // getWinesByColor,
-  // getWinesByTemperature,
   getWinesByFilters,
-  getWinesByOrigin,
   deleteWineById,
   updateWineById,
   createWine,
@@ -27,7 +23,6 @@ winesRouter.get("/idNumber/:idNumber", getWineByIdNumber);
 // winesRouter.get("/color/:color", getWinesByColor);
 // winesRouter.get("/temperature/:idealTemperature", getWinesByTemperature);
 winesRouter.post("/filter", getWinesByFilters)
-winesRouter.get("/origin/:origin", getWinesByOrigin);
 winesRouter.post("/create", [isAdmin], upload.single("picture"), createWine);
 winesRouter.delete("/remove/:id", [isAdmin], deleteWineById);
 winesRouter.patch(
