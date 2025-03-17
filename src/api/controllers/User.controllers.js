@@ -61,7 +61,7 @@ const userSignup = async (req, res, next) => {
     const newUser = new User({ ...req.body });
 
     const userDuplicated = await User.findOne({ email: req.body.email });
-    userDuplicated && res.status(400).json("that email is already in use");
+    userDuplicated && res.status(409).json("that email is already in use");
 
     const userSaved = await newUser.save();
     return res.status(201).json(userSaved);

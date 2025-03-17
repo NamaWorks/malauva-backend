@@ -64,55 +64,6 @@ const getWinesByFilters = async (req, res, next) => {
   }
 }
 
-// const getWinesByTaste = async (req, res, next) => {
-//   try {
-//     const { taste } = req.params;
-//     const winesByTaste = await Wine.find({ taste: taste });
-//     return res.status(200).json(winesByTaste);
-//   } catch (error) {
-//     return res.status(400).json(`error at getWinesByTaste: ${error}`);
-//   }
-// };
-
-// const getWinesByColor = async (req, res, next) => {
-//   try {
-//     const { color } = req.params;
-//     const winesByColor = await Wine.find({ color: color });
-//     return res.status(200).json(winesByColor);
-//   } catch (error) {
-//     return res.status(400).json(`error at getWinesByColor: ${error}`);
-//   }
-// };
-
-// const getWinesByTemperature = async (req, res, next) => {
-//   try {
-//     const { idealTemperature } = req.params;
-//     const winesByTemp = await Wine.find({ idealTemperature: idealTemperature });
-//     return res.status(200).json(winesByTemp);
-//   } catch (error) {
-//     return res.status(400).json(`error at getWinesByTemperature: ${error}`);
-//   }
-// };
-
-const getWinesByOrigin = async (req, res, next) => {
-  try {
-    const { origin } = req.params;
-    const winesByOrigin = await Wine.find({ origin: origin });
-    return res.status(200).json(winesByOrigin);
-  } catch (error) {
-    return res.status(400).json(`error at getWinesByOrigin: ${error}`);
-  }
-};
-
-const getWinesByScores = async (req, res, next) => {
-  try {
-    const { scores } = req.params;
-    //! NEED TO CHECK HOW TO CALCULATE THE AVERAGE SCORE
-  } catch (error) {
-    return res.status(400).json(`error at getWinesByScore: ${error}`);
-  }
-};
-
 //! PREPARE A PRICE FILTER GIVEN A MINMAX
 // find all documents named john and at least 18
 // await MyModel.find({ name: 'john', age: { $gte: 18 } }).exec();
@@ -202,12 +153,7 @@ module.exports = {
   getWines,
   getWineById,
   getWineByIdNumber,
-  // getWinesByTaste,
-  // getWinesByColor,
-  // getWinesByTemperature,
   getWinesByFilters,
-  getWinesByOrigin,
-  getWinesByScores,
   deleteWineById,
   updateWineById,
   populateWines,
