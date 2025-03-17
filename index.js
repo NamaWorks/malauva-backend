@@ -15,7 +15,20 @@ const server = express();
 connectDB();
 server.use(express.json())
 // with the next line we allow our server to use cross origin resources
-server.use(cors());
+server.use(cors(
+  {
+    origin: 'http://localhost:5173', // Replace with your frontend's origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+  },
+  {
+    origin: 'https://malauva-frontend.vercel.app',
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+    optionsSuccessStatus: 204
+  },
+));
 // with the next line we allow our app to read .json data
 server.use(express.json());
 
